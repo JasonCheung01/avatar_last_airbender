@@ -6,11 +6,11 @@ execute:
   echo: true
 
 book:
-  title: "YOUR PROJECT TITLE"
+  title: "Avatar the Last Airbender"
   author:
-    - AUTHOR1 (UNI1)
-    - AUTHOR2 (UNI2)
-  repo-url: https://github.com/YOUR_GITHUB_ACCOUNT/REPO_NAME
+    - Jason Cheung (jc6405)
+    - Rogelio Lopez Camara (rl3499)
+  repo-url: https://github.com/JasonCheung01/avatar_last_airbender
   date: today
   page-footer:
     right: |
