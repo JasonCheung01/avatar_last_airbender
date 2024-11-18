@@ -2,7 +2,7 @@
 
 ## Description
 
-The primary dataset for this project is sourced from the **`appa` R package**, created by Avery Robbins and available on GitHub ([appa repository](https://github.com/averyrobbins1/appa/tree/master)). The original data was scraped from two online sources: [Avatar Wiki](https://avatar.fandom.com/wiki/Avatar_Wiki) and  [IMDb](https://www.imdb.com/title/tt0417299/?ref_=fn_al_tt_2). The `appa` GitHub repository includes the R scripts used to perform the web scraping, offering transparency in the data collection process.
+The primary dataset for this project is sourced from the **`appa` R package**, created by Avery Robbins and available on GitHub ([appa repository](https://github.com/averyrobbins1/appa/tree/master)). The original data was scraped from two online sources: [Avatar Wiki](https://avatar.fandom.com/wiki/Avatar_Wiki) and [IMDb](https://www.imdb.com/title/tt0417299/?ref_=fn_al_tt_2). The `appa` GitHub repository includes the R scripts used to perform the web scraping, offering transparency in the data collection process.
 
 The dataset is structured as a table containing **13,385 rows** and **12 columns**, where each row corresponds to a character line or a scene description from the TV show *Avatar: The Last Airbender*. Below are the variables and their descriptions:
 
@@ -37,5 +37,17 @@ dat <- appa::appa
 library(dplyr)
 dat <- appa::appa
 glimpse(dat)
+```
+```{r}
+colSums(is.na(dat))
+```
+All the missing (`NA`) values in the `character_words` column are due to these rows representing scene descriptions rather than character dialogues. 
+```{r}
+dat |> filter(is.na(character_words)) |> select(character) |> unique()
+```
+
+For the `imdb_rating` column, all missing values correspond to a single episode.
+```{r}
+dat |> filter(is.na(imdb_rating)) |> group_by(book,chapter) |> summarise(n(),.groups ="keep")
 ```
 
