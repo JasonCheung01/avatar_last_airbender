@@ -14,7 +14,17 @@
     "href": "data.html",
     "title": "2  Data",
     "section": "",
-    "text": "2.1 Description",
+    "text": "2.1 Description\nThe primary dataset for this project is sourced from the appa R package, created by Avery Robbins and available on GitHub (appa repository). The original data was scraped from two online sources:Avatar Wiki and IMDb. The appa GitHub repository includes the R scripts used to perform the web scraping, offering transparency in the data collection process.\nThe dataset is structured as a table containing 13,385 rows and 12 columns, where each row corresponds to a character line or a scene description from the TV show Avatar: The Last Airbender. Below are the variables and their descriptions:\nThe dataset was last updated on June 6, 2020. While the underlying content from the TV show remains unchanged since its conclusion in July 2008, IMDb ratings may have fluctuated over time due to ongoing audience reviews.\nTo access the data, users can install the appa R package from GitHub using the following commands:\nCode\ndevtools::install_github(\"averyrobbins1/appa\")\n\n\nUsing GitHub PAT from the git credential store.\n\n\nSkipping install of 'appa' from a github remote, the SHA1 (c7ce69d1) has not changed since last install.\n  Use `force = TRUE` to force installation\n\n\nCode\ndat &lt;- appa::appa",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Data</span>"
+    ]
+  },
+  {
+    "objectID": "data.html#description",
+    "href": "data.html#description",
+    "title": "2  Data",
+    "section": "",
+    "text": "Variable\nClass\nDescription\n\n\n\n\nid\nInteger\nUnique row identifier.\n\n\nbook\nFactor\nBook name (e.g., “Water”, “Earth”).\n\n\nbook_num\nInteger\nBook number (1 for “Water”, 2 for “Earth”, etc.).\n\n\nchapter\nFactor\nChapter name.\n\n\nchapter_num\nInteger\nChapter number within a book.\n\n\ncharacter\nCharacter\nName of the character speaking.\n\n\nfull_text\nCharacter\nFull text (scene description or character text).\n\n\ncharacter_words\nCharacter\nText spoken by characters.\n\n\nwriter\nCharacter\nWriter(s) of the episode.\n\n\ndirector\nCharacter\nDirector(s) of the episode.\n\n\nimdb_rating\nDouble\nIMDb rating of the episode.",
     "crumbs": [
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Data</span>"
     ]
@@ -24,7 +34,7 @@
     "href": "data.html#missing-value-analysis",
     "title": "2  Data",
     "section": "2.2 Missing value analysis",
-    "text": "2.2 Missing value analysis",
+    "text": "2.2 Missing value analysis\n\n\nCode\nlibrary(dplyr)\n\n\n\nAttaching package: 'dplyr'\n\n\nThe following objects are masked from 'package:stats':\n\n    filter, lag\n\n\nThe following objects are masked from 'package:base':\n\n    intersect, setdiff, setequal, union\n\n\nCode\ndat &lt;- appa::appa\nglimpse(dat)\n\n\nRows: 13,385\nColumns: 12\n$ id                &lt;int&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 1…\n$ book              &lt;fct&gt; Water, Water, Water, Water, Water, Water, Water, Wat…\n$ book_num          &lt;int&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1…\n$ chapter           &lt;fct&gt; \"The Boy in the Iceberg\", \"The Boy in the Iceberg\", …\n$ chapter_num       &lt;int&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1…\n$ character         &lt;chr&gt; \"Katara\", \"Scene Description\", \"Sokka\", \"Scene Descr…\n$ full_text         &lt;chr&gt; \"Water. Earth. Fire. Air. My grandmother used to tel…\n$ character_words   &lt;chr&gt; \"Water. Earth. Fire. Air. My grandmother used to tel…\n$ scene_description &lt;list&gt; &lt;&gt;, &lt;&gt;, \"[Close-up of the boy as he grins confident…\n$ writer            &lt;chr&gt; \"‎Michael Dante DiMartino, Bryan Konietzko, Aaron Eha…\n$ director          &lt;chr&gt; \"Dave Filoni\", \"Dave Filoni\", \"Dave Filoni\", \"Dave F…\n$ imdb_rating       &lt;dbl&gt; 8.1, 8.1, 8.1, 8.1, 8.1, 8.1, 8.1, 8.1, 8.1, 8.1, 8.…",
     "crumbs": [
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Data</span>"
     ]
