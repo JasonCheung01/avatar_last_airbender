@@ -47,20 +47,7 @@ glimpse(dat)
 library(redav)
 plot_missing(dat,max_cols = 5)
 ```
-Lets see which characters have missing values:
-```{r}
-ggplot(dat |> group_by(character) |> 
-  summarise(Missing_dialogue=sum(is.na(character_words)/n())) |> 
-  arrange(desc(Missing_dialogue)) |> 
-  head(10),
-  aes(y=character,x=Missing_dialogue))+geom_col(fill="blue")+
-  scale_x_continuous(labels = scales::percent,limits = c(0,1.05)) +
-  labs(x = "Missing Dialogue (%)", y = "Character") +
-  theme_minimal()+
-  geom_text(aes(label = scales::percent(Missing_dialogue)), 
-            hjust = -0.1, color = "black")+
-  ggtitle("Top 10 Characters with Missing Dialogues")
-```
+
 Lets see which characters have missing values:
 ```{r}
 ggplot(dat |> group_by(character) |> 
