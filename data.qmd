@@ -44,7 +44,8 @@ dat <- appa::appa
 glimpse(dat)
 ```
 ```{r}
-colSums(is.na(dat))
+library(redav)
+plot_missing(dat,max_cols = 5)
 ```
 Lets see which characters have missing values:
 ```{r}
