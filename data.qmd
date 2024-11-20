@@ -2,4 +2,81 @@
 
 ## Description
 
+The primary dataset for this project is sourced from the **`appa` R package**, created by Avery Robbins and available on GitHub ([appa repository](https://github.com/averyrobbins1/appa/tree/master)). The original data was scraped from two online sources: [Avatar Wiki](https://avatar.fandom.com/wiki/Avatar_Wiki) and [IMDb](https://www.imdb.com/title/tt0417299/?ref_=fn_al_tt_2). The `appa` GitHub repository includes the R scripts used to perform the web scraping, offering transparency in the data collection process.
+
+The dataset is structured as a table containing **13,385 rows** and **12 columns**, where each row corresponds to a character line or a scene description from the TV show *Avatar: The Last Airbender*. Below are the variables and their descriptions:
+
+| Variable           | Class       | Description                                      |
+|--------------------|-------------|--------------------------------------------------|
+| `id`               | Integer     | Unique row identifier.                          |
+| `book`             | Factor      | Book name (e.g., "Water", "Earth").             |
+| `book_num`         | Integer     | Book number (1 for "Water", 2 for "Earth", etc.).|
+| `chapter`          | Factor      | Chapter name.                                   |
+| `chapter_num`      | Integer     | Chapter number within a book.                  |
+| `character`        | Character   | Name of the character speaking.                |
+| `full_text`        | Character   | Full text (scene description or character text).|
+| `character_words`  | Character   | Text spoken by characters.                     |
+| `writer`           | Character   | Writer(s) of the episode.                      |
+| `director`         | Character   | Director(s) of the episode.                    |
+| `imdb_rating`      | Double      | IMDb rating of the episode.                    |
+
+
+The dataset was last updated on **June 6, 2020**. While the underlying content from the TV show remains unchanged since its conclusion in **July 2008**, IMDb ratings may have fluctuated over time due to ongoing audience reviews.
+
+Another issue with the data is that the `character` column may list multiple characters in a single row. If we aim to measure which character speaks the most, this column will require additional preprocessing to split and appropriately attribute the dialogue to each individual character.
+
+Additionally, if we want to create statistics based on character-specific attributes, such as age or gender, this information is not present in the dataset and will need to be obtained and integrated from an external source.
+
+To access the data, users can install the **`appa` R package** from GitHub using the following commands:
+
+```{r}
+devtools::install_github("averyrobbins1/appa")
+dat <- appa::appa
+```
+
+
+
 ## Missing value analysis
+```{r}
+library(dplyr)
+library(ggplot2)
+dat <- appa::appa
+glimpse(dat)
+```
+```{r}
+library(redav)
+plot_missing(dat,max_cols = 5)
+```
+
+Lets see which characters have missing values:
+```{r}
+ggplot(dat |> group_by(character) |> 
+  summarise(Missing_dialogue=sum(is.na(character_words)/n())) |> 
+  arrange(desc(Missing_dialogue)) |> 
+  head(10),
+  aes(y=character,x=Missing_dialogue))+geom_col(fill="blue")+
+  scale_x_continuous(labels = scales::percent,limits = c(0,1.05)) +
+  labs(x = "Missing Dialogue (%)", y = "Character") +
+  theme_minimal()+
+  geom_text(aes(label = scales::percent(Missing_dialogue)), 
+            hjust = -0.1, color = "black")+
+  ggtitle("Top 10 Characters with Missing Dialogues")
+```
+All the missing (`NA`) values in the `character_words` column are due to these rows representing scene descriptions rather than character dialogues. 
+
+Now, we will do the same with `imdb_rating`, and see what are the episodes without a rating.
+```{r}
+ggplot(dat |> group_by(chapter) |> 
+  summarise(Missing_rating=sum(is.na(imdb_rating)/n())) |> 
+  arrange(desc(Missing_rating)) |> 
+  head(10),
+  aes(y=chapter,x=Missing_rating))+geom_col(fill="blue")+
+  scale_x_continuous(labels = scales::percent,limits = c(0,1.05)) +
+  labs(x = "Missing Rating (%)", y = "Episode") +
+  theme_minimal()+
+  geom_text(aes(label = scales::percent(Missing_rating)), 
+            hjust = -0.1, color = "black")+
+  ggtitle("Top 10 Episodes without IMDb Rating")
+```
+
+There is only one episode without an `imdb_rating`
