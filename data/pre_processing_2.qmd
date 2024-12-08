@@ -1,0 +1,101 @@
+# Pre-processing
+
+```{r}
+avatar <- appa::appa 
+avatar
+```
+
+```{r} 
+library(tidyverse)
+
+scene_description <- avatar |> 
+  select(id, scene_description) |> 
+  unnest_longer(scene_description) |> 
+  filter(!is.na(scene_description)) 
+
+head(scene_description)
+```
+
+```{r} 
+# This contains the full data for the avatar data set now with scene description
+full_avatar <- avatar |> 
+  select(-scene_description) |>
+  left_join(scene_description, by = "id")
+
+full_avatar <- full_avatar |> 
+  relocate(scene_description, .after = character_words)
+
+head(full_avatar)
+```
+
+```{r}
+# If both the character_words and scene_description is missing, that means it 
+# just contains description of how they directed the show to go from one scene 
+# to another or contains info about what is going on in the scene which we do 
+# not care about. Thus, we will fully drop those data
+
+full_avatar |>
+  filter(is.na(character_words) & is.na(scene_description)) |>
+  select(full_text)
+```
+Lets use this to identify a change of scene, which will be usefull for character interactions
+```{r}
+full_avatar <- full_avatar |> 
+  mutate(new_scene=case_when(is.na(character_words) & is.na(scene_description) ~ 1,
+                                          TRUE ~ 0))
+full_avatar |> head()
+```
+Adding an scene_id
+```{r}
+full_avatar <- full_avatar |> mutate(scene_id=cumsum(new_scene))
+```
+
+```{r}
+# Exclude rows where both character_words and scene_description are missing 
+dim(full_avatar) 
+
+full_avatar <- full_avatar |>
+  filter(!(is.na(character_words) & is.na(scene_description))) 
+
+dim(full_avatar) 
+head(full_avatar)
+```
+
+```{r}
+# We can probably get rid of full text column as it includes info from both the 
+# character words and scene_description  
+full_avatar <- full_avatar |>
+  select(-full_text)
+
+head(full_avatar)
+```
+
+```{r}
+# Seems like there is a few duplicate data in data set that are exactly the same  
+dim(full_avatar)
+full_avatar <- full_avatar[!duplicated(full_avatar), ]  
+
+dim(full_avatar) 
+head(full_avatar) 
+
+# I also noticed that some data are pretty much the same but with different 
+# scene description which I decided to keep for now 
+```
+
+```{r}
+full_avatar <- as.data.frame(full_avatar) 
+write.csv(full_avatar, "avatar_data_scene.csv", row.names = FALSE)
+```
+
+```{r} 
+# This contains info if both character said the same phrase simultaneously 
+# full_avatar |>
+#   filter(sapply(character, function(x) {
+#     words <- strsplit(x, "\\s+")[[1]]  # Split by white space
+#     "and" %in% words  # Check if "and" is an exact word in the split text
+#   })) |>
+#   print()
+
+# unique(full_avatar$character)
+```
+
