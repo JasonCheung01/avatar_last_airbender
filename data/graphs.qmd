@@ -489,9 +489,9 @@ ggsave("../images/graphs/top10_interactions_book.png",
 
 Counting interactions per character with other characters (It could be the data we use in our D3 graph)
 
-
+Saving data for the d3 plot
 ```{r}
-variable <- "Zuko"
+variable <- "Aang"
 including_main_characters <- F
 
 scene_character <- unique_avatar_character_scene |> filter(character==variable) |> select(scene_id) |> unique() |> pull()
@@ -509,12 +509,14 @@ if(!including_main_characters){
 
 data <- data |> 
   group_by(character) |> 
-  summarise(frequency = n()) |> 
-  arrange(desc(frequency)) |> 
-  ungroup()
+  summarise(value = n()) |> 
+  arrange(desc(value)) |> 
+  ungroup() |> head(10)
 
+data['color']='#3699B1'
 data
 
+write.csv(data, "Aang.csv", row.names = FALSE)
 ```
 Alluvia for interactions
 
