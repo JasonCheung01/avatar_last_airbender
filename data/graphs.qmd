@@ -314,7 +314,7 @@ average_ratings_character <-
              y = fct_reorder(character, mean_rating, .desc = FALSE), 
              size = n_chapters)) +
   geom_point(colour="#a1785c") +    
-  labs(title = "Average rating for characters with more than 30 participations in one episode", 
+  labs(title = "Average rating for characters with more than 15 participations in one episode", 
        x = "IMDb Rating", 
        y = "Character") +
   theme_avatar() 
