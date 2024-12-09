@@ -489,7 +489,120 @@ ggsave("../images/graphs/top10_interactions_book.png",
 
 Counting interactions per character with other characters (It could be the data we use in our D3 graph)
 
+Saving data for the d3 plot
+```{r}
+variable <- "Aang"
+including_main_characters <- F
 
+scene_character <- unique_avatar_character_scene |> filter(character==variable) |> select(scene_id) |> unique() |> pull()
+list<- as.array(scene_character)
+
+
+data <- unique_avatar_character_scene |> filter(scene_id %in% list,
+                                                character != variable) |> 
+  select(character,scene_id) |> distinct()
+
+if(!including_main_characters){
+  data <- data |> filter(!(character %in% main_cast))
+}
+
+
+data <- data |> 
+  group_by(character) |> 
+  summarise(value = n()) |> 
+  arrange(desc(value)) |> 
+  ungroup() |> head(10)
+
+data['color']='#6798DE'
+data
+
+write.csv(data, "Aang.csv", row.names = FALSE)
+```
+```{r}
+variable <- "Katara"
+including_main_characters <- F
+
+scene_character <- unique_avatar_character_scene |> filter(character==variable) |> select(scene_id) |> unique() |> pull()
+list<- as.array(scene_character)
+
+
+data <- unique_avatar_character_scene |> filter(scene_id %in% list,
+                                                character != variable) |> 
+  select(character,scene_id) |> distinct()
+
+if(!including_main_characters){
+  data <- data |> filter(!(character %in% main_cast))
+}
+
+
+data <- data |> 
+  group_by(character) |> 
+  summarise(value = n()) |> 
+  arrange(desc(value)) |> 
+  ungroup() |> head(10)
+
+data['color']='#3699B1'
+data
+
+write.csv(data, "Katara.csv", row.names = FALSE)
+```
+```{r}
+variable <- "Sokka"
+including_main_characters <- F
+
+scene_character <- unique_avatar_character_scene |> filter(character==variable) |> select(scene_id) |> unique() |> pull()
+list<- as.array(scene_character)
+
+
+data <- unique_avatar_character_scene |> filter(scene_id %in% list,
+                                                character != variable) |> 
+  select(character,scene_id) |> distinct()
+
+if(!including_main_characters){
+  data <- data |> filter(!(character %in% main_cast))
+}
+
+
+data <- data |> 
+  group_by(character) |> 
+  summarise(value = n()) |> 
+  arrange(desc(value)) |> 
+  ungroup() |> head(10)
+
+data['color']='#a1785c'
+data
+
+write.csv(data, "Sokka.csv", row.names = FALSE)
+```
+
+```{r}
+variable <- "Toph"
+including_main_characters <- F
+
+scene_character <- unique_avatar_character_scene |> filter(character==variable) |> select(scene_id) |> unique() |> pull()
+list<- as.array(scene_character)
+
+
+data <- unique_avatar_character_scene |> filter(scene_id %in% list,
+                                                character != variable) |> 
+  select(character,scene_id) |> distinct()
+
+if(!including_main_characters){
+  data <- data |> filter(!(character %in% main_cast))
+}
+
+
+data <- data |> 
+  group_by(character) |> 
+  summarise(value = n()) |> 
+  arrange(desc(value)) |> 
+  ungroup() |> head(10)
+
+data['color']='#73B067'
+data
+
+write.csv(data, "Toph.csv", row.names = FALSE)
+```
 ```{r}
 variable <- "Zuko"
 including_main_characters <- F
@@ -509,14 +622,20 @@ if(!including_main_characters){
 
 data <- data |> 
   group_by(character) |> 
-  summarise(frequency = n()) |> 
-  arrange(desc(frequency)) |> 
-  ungroup()
+  summarise(value = n()) |> 
+  arrange(desc(value)) |> 
+  ungroup() |> head(10)
 
+data['color']='#EA666D'
 data
 
+write.csv(data, "Zuko.csv", row.names = FALSE)
 ```
+
+
+
 Alluvia for interactions
+
 
 ```{r}
 cast <- main_cast |> append("Iroh")
