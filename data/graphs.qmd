@@ -278,6 +278,44 @@ ggsave("../images/graphs/avatar_show_imdb_rating_all_episode.png",
        plot = avatar_show_imdb_rating_all_episode_graph) 
 ```
 
+```{r}
+rating_character <- avatar |>
+  select(book, book_num, chapter, chapter_num, character,imdb_rating)
+
+rating_character$book<-factor(rating_character$book,levels = c("Water","Earth","Fire"))
+
+rating_character<-rating_character |> group_by(book,chapter,character, imdb_rating) |>
+  summarise(participations=n(),.groups = 'keep')
+
+min_participations = 30
+
+rating_character <- rating_character |> filter(participations>=min_participations)
+
+rating_character <- rating_character |> group_by(character) |>
+  summarise(mean_rating=mean(imdb_rating,na.rm = T),n_chapters=n()) |> 
+  arrange(desc(mean_rating))
+
+rating_character
+```
+
+```{r,fig.width=10, fig.height=7}
+average_ratings_character <-  
+  rating_character |>  
+  ggplot(aes(x = mean_rating, 
+             y = fct_reorder(character, mean_rating, .desc = FALSE), 
+             size = n_chapters)) +
+  geom_point() +    
+  labs(title = "Average rating for characters with more than 30 participations in one episode", 
+       x = "IMDb Rating", 
+       y = "Character") +
+  theme_avatar() 
+
+average_ratings_character 
+
+ggsave("../images/graphs/average_ratings_character.png", 
+       plot = average_ratings_character) 
+```
+
 
 
 Graph to see how often each of the main cast interact with one another  
