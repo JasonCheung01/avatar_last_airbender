@@ -304,7 +304,11 @@ average_ratings_character <-
   ggplot(aes(x = mean_rating, 
              y = fct_reorder(character, mean_rating, .desc = FALSE), 
              size = n_chapters)) +
+<<<<<<< HEAD
   geom_point(colour="#a1785c") +    
+=======
+  geom_point() +    
+>>>>>>> 0282dc9ca53f3a535893210b4f233b97d2d1765a
   labs(title = "Average rating for characters with more than 30 participations in one episode", 
        x = "IMDb Rating", 
        y = "Character") +
