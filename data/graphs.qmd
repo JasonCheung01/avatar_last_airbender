@@ -287,7 +287,16 @@ rating_character$book<-factor(rating_character$book,levels = c("Water","Earth","
 rating_character<-rating_character |> group_by(book,chapter,character, imdb_rating) |>
   summarise(participations=n(),.groups = 'keep')
 
-min_participations = 30
+main_cast <- c('Aang', 'Sokka', 'Katara', 'Zuko', 'Toph')
+
+rating_character |> group_by(character) |> summarise(mean_participations=mean(participations)) |> 
+  filter(character %in% main_cast)
+
+```
+
+
+```{r}
+min_participations = 15
 
 rating_character <- rating_character |> filter(participations>=min_participations)
 
@@ -295,7 +304,7 @@ rating_character <- rating_character |> group_by(character) |>
   summarise(mean_rating=mean(imdb_rating,na.rm = T),n_chapters=n()) |> 
   arrange(desc(mean_rating))
 
-rating_character
+rating_character<-rating_character |> drop_na()
 ```
 
 ```{r,fig.width=10, fig.height=7}
@@ -304,11 +313,7 @@ average_ratings_character <-
   ggplot(aes(x = mean_rating, 
              y = fct_reorder(character, mean_rating, .desc = FALSE), 
              size = n_chapters)) +
-<<<<<<< HEAD
   geom_point(colour="#a1785c") +    
-=======
-  geom_point() +    
->>>>>>> 0282dc9ca53f3a535893210b4f233b97d2d1765a
   labs(title = "Average rating for characters with more than 30 participations in one episode", 
        x = "IMDb Rating", 
        y = "Character") +
