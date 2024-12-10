@@ -280,11 +280,11 @@ ggsave("../images/graphs/avatar_show_imdb_rating_all_episode.png",
 
 ```{r}
 rating_character <- avatar |>
-  select(book, book_num, chapter, chapter_num, character,imdb_rating)
+  select(chapter, chapter_num, character,imdb_rating)
 
-rating_character$book<-factor(rating_character$book,levels = c("Water","Earth","Fire"))
+#rating_character$book<-factor(rating_character$book,levels = c("Water","Earth","Fire"))
 
-rating_character<-rating_character |> group_by(book,chapter,character, imdb_rating) |>
+rating_character<-rating_character |> group_by(chapter,character, imdb_rating) |>
   summarise(participations=n(),.groups = 'keep')
 
 main_cast <- c('Aang', 'Sokka', 'Katara', 'Zuko', 'Toph')
@@ -305,16 +305,18 @@ rating_character <- rating_character |> group_by(character) |>
   arrange(desc(mean_rating))
 
 rating_character<-rating_character |> drop_na()
+
+rating_character
 ```
 
-```{r,fig.width=10, fig.height=7}
+```{r,fig.width=9, fig.height=7}
 average_ratings_character <-  
-  rating_character |>  
+  rating_character |> filter(n_chapters>1) |>  
   ggplot(aes(x = mean_rating, 
              y = fct_reorder(character, mean_rating, .desc = FALSE), 
              size = n_chapters)) +
   geom_point(colour="#a1785c") +    
-  labs(title = "Average rating for characters with more than 15 participations in one episode", 
+  labs(title = "Average rating for characters with more than 15 participations in more than 1 episode", 
        x = "IMDb Rating", 
        y = "Character") +
   theme_avatar() 
@@ -325,6 +327,9 @@ ggsave("../images/graphs/average_ratings_character.png",
        plot = average_ratings_character) 
 ```
 
+```{r}
+rating_character |> filter(n_chapters>1) |> arrange(desc(mean_rating))
+```
 
 
 Graph to see how often each of the main cast interact with one another  
@@ -442,6 +447,15 @@ top10_characters_solo_scene
 ggsave("../images/graphs/top10_character_solo_scene.png", 
        plot = top10_characters_solo_scene)
 ```
+```{r}
+unique_avatar_character_scene |> filter(character=='Piandao',num_characters_scene==1)
+unique_avatar_character_scene |> filter(chapter=="Sokka's Master") 
+```
+```{r}
+unique_avatar_character_scene |> filter(character=='Roku',num_characters_scene==1)
+```
+
+
 This graph is not very different from the "Top 10 characters with most number of lines". We can notice, that in here appears new characters like, Piandao and Roku, while, Jet and Suki, disappeared.
 
 ```{r}
@@ -683,7 +697,8 @@ interactions_alluvial<-
   facet_wrap(~ book,ncol = 2,scales = "free")+
   scale_x_discrete(limits=c("",""))+
   theme_avatar()+
-  labs(title="Interactions between the main cast per book")+
+  labs(title="Interactions between the main cast per book",
+       y = "# of Scenes")+
   theme(legend.position = "none")
 
 interactions_alluvial

@@ -1,20 +1,36 @@
 # Interactive graph
 
+```{=html}
 <style>
   * {
     font-family: sans-serif;
   }
 </style>
+```
 
 ## Top Interactions Between Main and Supportive Characters
-<input type="radio" name="character" value="Aang">Aang</input>
-<input type="radio" name="character" value="Katara">Katara</input>
-<input type="radio" name="character" value="Sokka">Sokka</input>
-<input type="radio" name="character" value="Toph">Toph</input>
-<input type="radio" name="character" value="Zuko">Zuko</input>
 
-<div id="plot">
-</div>
+<input type="radio" name="character" value="Aang">Aang</input> <input type="radio" name="character" value="Katara">Katara</input> <input type="radio" name="character" value="Sokka">Sokka</input> <input type="radio" name="character" value="Toph">Toph</input> <input type="radio" name="character" value="Zuko">Zuko</input>
 
+::: {#plot}
+:::
+
+Not all interactions are between main characters; there are also supportive characters who play a crucial role in shaping our beloved **Avatar Team**. From the previous graph, we observed the following:
+
+1.  For **Aang**, the most important supportive character is **Roku**. Beyond being his past life, Roku serves as Aang’s mentor and guide throughout his journey. Since Roku can only be seen by Aang, he doesn’t appear in the interaction graphs of other characters.
+
+2.  For **Katara**, the most significant supportive character is **Jet**, which is expected. Not only is Jet one of the characters with the most episodes and lines in the show, but he also shares a special connection with Katara. Jet plays a pivotal role in Katara’s development, and we see him appear in other characters’ graphs, except for Zuko’s.
+
+3.  For **Sokka**, **Suki** stands out as the most important supportive character. This isn’t surprising, given that Suki is Sokka’s love interest. Additionally, since Suki eventually works with the Team Avatar, she appears in other graphs but is only relevant in **Toph’s** interactions.
+
+4.  Interestingly, the most significant supportive character for **Toph** is also **Suki**. However, the number of interactions Toph has with Suki (16) is far fewer than Sokka’s interactions with Suki (50). This indicates that, unlike other main characters, Toph has very few interactions with characters outside the main cast.
+
+5.  **Zuko** has the highest number of interactions with a supportive character, with more than 100 interactions with his uncle **Iroh**. This is especially impressive considering their interactions stop in the third book, as previously mentioned. Iroh’s influence is so significant that he also appears in the graphs of other characters. Additionally, **Azula** is relevant to Zuko, with around 30 interactions. While Azula also appears in Toph’s graph, it is with only three interactions, leading us to conclude that Azula’s relevance is primarily tied to Zuko.
+
+```{=html}
 <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+```
+
+```{=html}
 <script src="scripts/myscript.js"></script>
+```
