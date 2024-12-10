@@ -691,4 +691,47 @@ ggsave("../images/graphs/interactions_alluvial.png",
        plot = interactions_alluvial)
   
 ```
+Just out of curiosity, lets find out how many times the cabbage merchant appears in the show
+
+```{r}
+characters<-unique_avatar_character$character |> unique()
+characters[grepl("merchant", characters)]
+```
+
+```{r}
+cabbage<-unique_avatar_character |> filter(character=='Cabbage merchant')
+cabbage
+```
+```{r}
+cabbage$chapter<-factor(cabbage$chapter, levels = c("The King of Omashu","The Waterbending Scroll","The Serpent's Pass","The Tales of Ba Sing Se"))
+cabbage$book<-factor(cabbage$book,levels = c("Water","Earth","Fire"))
+```
+
+```{r}
+cabbages<-ggplot(cabbage, aes(x = chapter,
+                    y = length(character_words)*1.1, fill = book)) +
+  geom_bar(stat = "identity", color = "black") +  # Stacked bars
+  geom_text(aes(label = str_wrap(character_words, width = 15)), 
+            position = position_stack(vjust = 0.5), 
+            size = 2, 
+            color = "white") +  # Add text inside stacks
+  labs(
+    title = "Appearances of the Cabbage Merchant",
+    x = "Chapter",
+    y = "Participations",
+    fill = "Book"
+  ) +
+  scale_fill_manual(values=c("#6798DE","#73B067","#EA666D"))+
+  theme_avatar() +
+  theme(
+    #axis.text.x = element_text(angle = 45, hjust = 1),  # Rotate x-axis labels
+    axis.text.y = element_blank(),  # Remove y-axis text
+    axis.ticks.y = element_blank(),  # Remove y-axis ticks
+    panel.grid.major.y = element_blank()  # Remove y-axis grid lines
+  )
+
+cabbages
+ggsave("../images/graphs/cabbages.png", 
+       plot = cabbages)
+```
 
