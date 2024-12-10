@@ -6,6 +6,7 @@
   }
 </style>
 
+## Top Interactions Between Main and Supportive Characters
 <input type="radio" name="character" value="Aang">Aang</input>
 <input type="radio" name="character" value="Katara">Katara</input>
 <input type="radio" name="character" value="Sokka">Sokka</input>
