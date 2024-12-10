@@ -18,10 +18,10 @@ Toph, and Zuko, were among the top 10 with the most dialogues/lines throughout
 the show, where Aang had the most dialogue of about 25%. Thus, answering the 
 first part of our question of how often Aang speaks throughout the show. 
 Additionally, we can see that the male characters in Team Avatar spoke way more 
-than the female characters. The males spoke about 68% of the time in Team Avatar, 
-whereas the females spoke about 32%. Lastly, we can see important characters 
-like Iroh, Azula, and Suki were among the top 10, which makes sense as each 
-played a significant role in some member's development in Team Avatar.
+than the female characters where the males spoke about 68% of the time in Team 
+Avatar, whereas the females spoke about 32%. Lastly, we can see important 
+characters like Iroh, Azula, and Suki were among the top 10, which makes sense 
+as each played a significant role in some member's development in Team Avatar.
 
 However, one thing about this graph that caught our attention was that side 
 characters like Zhao and Jet were among the top 10. This piqued our interest as 
@@ -54,6 +54,27 @@ dialogues than those who appear often.
 ### What about each season? Does his friends, Katara, Sokka, Toph, and Zuko, begin to talk more than him?
 
 ![Top 10 Character Dialogue/Lines Per Book](images/graphs/top10_character_dialogue_per_book.png)
+
+Having answered the first question of how often Aang speaks in the show, to 
+answer the second part of our question of how much he speaks per season, we 
+decided to keep the top 10 characters with the most dialogue and found the 
+frequency of each per season. From this, we can see that Aang speaks less per 
+season. Starting from the Water Book Chapter, he had a marginal amount of 
+dialogue compared to all the other top 10 characters, where he had more than 
+150 lines than Katara, who was number 2. However, this began to change during 
+the Earth Book Chapter, where his dialogue dropped by 300, leading Sokka to 
+overtake him in both the Earth and Fire Book Chapter. Thus, answering our 
+second part where, among the members of Team Avatar, only Sokka began to talk 
+more than Aang.
+
+Although this graph was mainly created to help answer the second part of the 
+question, it still is really meaningful as it also allows us to observe how 
+important each character becomes and their roles during each season. For 
+instance, we can see that Zhao had a pretty important role during the Water 
+Book Chapter but not the Earth and Fire Book Chapter, as his number of 
+dialogues dropped to 0. Another example that we can see from the graph is the 
+rising importance of Toph, Zuko, and Suki towards the show as their number of 
+dialogues began to increase each season.
 
 ## What are the trends of IMDb ratings throughout the show?  
 ### IMDb Ratings Trend Per Book Chapter  
