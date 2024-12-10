@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.555">
+<meta name="generator" content="quarto-1.5.57">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Avatar the Last Airbender - 4&nbsp; Interactive graph</title>
+<title>4&nbsp; Interactive graph – Avatar the Last Airbender</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -78,13 +78,13 @@ ul.task-list li input[type="checkbox"] {
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
         <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./d3graph.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Interactive graph</span></a></li></ol></nav>
-        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
-      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -145,7 +145,13 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#top-interactions-between-main-and-supportive-characters" id="toc-top-interactions-between-main-and-supportive-characters" class="nav-link active" data-scroll-target="#top-interactions-between-main-and-supportive-characters"><span class="header-section-number">4.1</span> Top Interactions Between Main and Supportive Characters</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/JasonCheung01/avatar_last_airbender/edit/main/d3graph.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/JasonCheung01/avatar_last_airbender/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -174,13 +180,25 @@ ul.task-list li input[type="checkbox"] {
     font-family: sans-serif;
   }
 </style>
+<section id="top-interactions-between-main-and-supportive-characters" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="top-interactions-between-main-and-supportive-characters"><span class="header-section-number">4.1</span> Top Interactions Between Main and Supportive Characters</h2>
+<p><input type="radio" name="character" value="Aang">Aang <input type="radio" name="character" value="Katara">Katara <input type="radio" name="character" value="Sokka">Sokka <input type="radio" name="character" value="Toph">Toph <input type="radio" name="character" value="Zuko">Zuko</p>
 <div id="plot">
 
 </div>
+<p>Not all interactions are between main characters; there are also supportive characters who play a crucial role in shaping our beloved <strong>Avatar Team</strong>. From the previous graph, we observed the following:</p>
+<ol type="1">
+<li><p>For <strong>Aang</strong>, the most important supportive character is <strong>Roku</strong>. Beyond being his past life, Roku serves as Aang’s mentor and guide throughout his journey. Since Roku can only be seen by Aang, he doesn’t appear in the interaction graphs of other characters.</p></li>
+<li><p>For <strong>Katara</strong>, the most significant supportive character is <strong>Jet</strong>, which is expected. Not only is Jet one of the characters with the most episodes and lines in the show, but he also shares a special connection with Katara. Jet plays a pivotal role in Katara’s development, and we see him appear in other characters’ graphs, except for Zuko’s.</p></li>
+<li><p>For <strong>Sokka</strong>, <strong>Suki</strong> stands out as the most important supportive character. This isn’t surprising, given that Suki is Sokka’s love interest. Additionally, since Suki eventually works with the Team Avatar, she appears in other graphs but is only relevant in <strong>Toph’s</strong> interactions.</p></li>
+<li><p>Interestingly, the most significant supportive character for <strong>Toph</strong> is also <strong>Suki</strong>. However, the number of interactions Toph has with Suki (16) is far fewer than Sokka’s interactions with Suki (50). This indicates that, unlike other main characters, Toph has very few interactions with characters outside the main cast.</p></li>
+<li><p><strong>Zuko</strong> has the highest number of interactions with a supportive character, with more than 100 interactions with his uncle <strong>Iroh</strong>. This is especially impressive considering their interactions stop in the third book, as previously mentioned. Iroh’s influence is so significant that he also appears in the graphs of other characters. Additionally, <strong>Azula</strong> is relevant to Zuko, with around 30 interactions. While Azula also appears in Toph’s graph, it is with only three interactions, leading us to conclude that Azula’s relevance is primarily tied to Zuko.</p></li>
+</ol>
 <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
 <script src="scripts/myscript.js"></script>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -218,18 +236,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -261,7 +268,29 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
       var filterRegex = new RegExp('/' + window.location.host + '/');
@@ -269,7 +298,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
     // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
     for (var i=0; i<links.length; i++) {
       const link = links[i];
       if (!isInternal(link.href)) {
@@ -612,7 +641,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions"><ul><li><a href="https://github.com/JasonCheung01/avatar_last_airbender/edit/main/d3graph.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/JasonCheung01/avatar_last_airbender/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/JasonCheung01/avatar_last_airbender/edit/main/d3graph.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/JasonCheung01/avatar_last_airbender/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
 <p>This book was built with <a href="https://quarto.org/">Quarto</a>.</p>
 </div>

@@ -300,6 +300,58 @@ ggsave("../images/graphs/avatar_show_imdb_rating_all_episode.png",
        plot = avatar_show_imdb_rating_all_episode_graph) 
 ```
 
+```{r}
+rating_character <- avatar |>
+  select(chapter, chapter_num, character,imdb_rating)
+
+#rating_character$book<-factor(rating_character$book,levels = c("Water","Earth","Fire"))
+
+rating_character<-rating_character |> group_by(chapter,character, imdb_rating) |>
+  summarise(participations=n(),.groups = 'keep')
+
+main_cast <- c('Aang', 'Sokka', 'Katara', 'Zuko', 'Toph')
+
+rating_character |> group_by(character) |> summarise(mean_participations=mean(participations)) |> 
+  filter(character %in% main_cast)
+
+```
+
+
+```{r}
+min_participations = 15
+
+rating_character <- rating_character |> filter(participations>=min_participations)
+
+rating_character <- rating_character |> group_by(character) |>
+  summarise(mean_rating=mean(imdb_rating,na.rm = T),n_chapters=n()) |> 
+  arrange(desc(mean_rating))
+
+rating_character<-rating_character |> drop_na()
+
+rating_character
+```
+
+```{r,fig.width=9, fig.height=7}
+average_ratings_character <-  
+  rating_character |> filter(n_chapters>1) |>  
+  ggplot(aes(x = mean_rating, 
+             y = fct_reorder(character, mean_rating, .desc = FALSE), 
+             size = n_chapters)) +
+  geom_point(colour="#a1785c") +    
+  labs(title = "Average rating for characters with more than 15 participations in more than 1 episode", 
+       x = "IMDb Rating", 
+       y = "Character") +
+  theme_avatar() 
+
+average_ratings_character 
+
+ggsave("../images/graphs/average_ratings_character.png", 
+       plot = average_ratings_character) 
+```
+
+```{r}
+rating_character |> filter(n_chapters>1) |> arrange(desc(mean_rating))
+```
 
 
 Graph to see how often each of the main cast interact with one another  
@@ -337,5 +389,386 @@ interaction_counts <- character_interaction |>
   separate(pair, into = c("character1", "character2"), sep = " - ") 
 
 interaction_counts
+```
+The problem with this approach is that some characters can have interaction without explicitly saying the other character name. And in some cases, the character can use a nickname. To solve this problem, we will measure interaction between characters if they share a scene.
+
+```{r}
+avatar_scene <- read.csv("avatar_data_scene.csv", header = TRUE) 
+avatar_character_scene <- avatar_scene |>
+  select(book, chapter, chapter_num, character, character_words,scene_id) 
+
+unique_avatar_character_scene <- avatar_character_scene[!duplicated(avatar_character_scene), ]
+
+unique_avatar_character_scene |> head()
+```
+
+```{r}
+unique_avatar_character_scene <- unique_avatar_character_scene %>%
+  group_by(scene_id) %>%
+  mutate(
+    scene_characters = paste(sort(unique(character[!is.na(character)])), collapse = ", "),
+    num_characters_scene=length(unique(character[!is.na(character)]))) %>%
+  ungroup()
+unique_avatar_character_scene |> head()
+```
+```{r}
+unique_avatar_character_scene$book <-
+  fct_relevel(unique_avatar_character_scene$book, "Water")
+unique_avatar_character_scene |> head()
+```
+
+
+
+```{r}
+# this data frame measure the interactions between characters where a set of character have an interaction if they share a scene 
+# entirety of show 
+interactions <- unique_avatar_character_scene |> 
+  group_by(scene_characters,num_characters_scene) |> 
+  summarise(frequency = n(),.groups = 'drop') |> 
+  arrange(desc(frequency)) |> 
+  ungroup()
+
+interactions
+```
+```{r}
+top10_interactions_graph <- 
+  interactions |> filter(num_characters_scene>1) |> 
+  head(10) |>  
+  ggplot(aes(y = fct_reorder(scene_characters, frequency), 
+             x = frequency)) +
+  geom_col(fill = "#a1785c") + 
+  # ylab("") + 
+  labs(title = "Top 10 Interactions Throughout Entire Show", 
+       x = "# of Scenes", 
+       y = "Characters") +  
+  scale_x_continuous(breaks = seq(0, max(interactions$frequency), 
+                                  by = 200)) +  
+  theme_avatar()
+
+top10_interactions_graph 
+
+ggsave("../images/graphs/top10_interactions.png", 
+       plot = top10_interactions_graph)
+```
+```{r}
+### Top charcters with the most solo Scenes
+top10_characters_solo_scene <- 
+  interactions |> filter(num_characters_scene==1) |> 
+  head(10) |>  
+  ggplot(aes(y = fct_reorder(scene_characters, frequency), 
+             x = frequency)) +
+  geom_col(fill = "#a1785c") + 
+  # ylab("") + 
+  labs(title = "Top Characters with the Most Solo Scenes", 
+       x = "# of Scenes", 
+       y = "Character")+  
+  theme_avatar()
+
+top10_characters_solo_scene 
+
+ggsave("../images/graphs/top10_character_solo_scene.png", 
+       plot = top10_characters_solo_scene)
+```
+```{r}
+unique_avatar_character_scene |> filter(character=='Piandao',num_characters_scene==1)
+unique_avatar_character_scene |> filter(chapter=="Sokka's Master") 
+```
+```{r}
+unique_avatar_character_scene |> filter(character=='Roku',num_characters_scene==1)
+```
+
+
+This graph is not very different from the "Top 10 characters with most number of lines". We can notice, that in here appears new characters like, Piandao and Roku, while, Jet and Suki, disappeared.
+
+```{r}
+### Top interactions per book
+interactions_book <- unique_avatar_character_scene |> 
+  group_by(scene_characters,num_characters_scene, book) |> 
+  summarise(frequency = n(),.groups = 'drop') |> 
+  arrange(book,desc(frequency)) |> 
+  ungroup()
+
+interactions_book
+
+```
+
+```{r}
+filtered_dataframe <- 
+  interactions_book |> filter(num_characters_scene>1) |> 
+  group_by(book) |> 
+  slice_max(order_by = frequency, n = 10, with_ties = FALSE) %>%
+  ungroup()
+
+filtered_dataframe
+
+```
+```{r}
+#Top 10 interactions per book
+top10_interactions_graph_book <- 
+  filtered_dataframe |>   
+  ggplot(aes(y = fct_reorder(scene_characters, frequency), 
+             x = frequency)) +
+  geom_col(aes(fill=book)) + 
+  # ylab("") + 
+  labs(title = "Top 10 Interactions per Book", 
+       x = "# of Scenes", 
+       y = "Characters") +
+  facet_wrap(~ book)+
+  scale_fill_manual(values=c("#6798DE","#73B067","#EA666D"))+
+  theme_avatar()
+
+top10_interactions_graph_book 
+
+ggsave("../images/graphs/top10_interactions_book.png", 
+       plot = top10_interactions_graph_book)
+```
+
+Counting interactions per character with other characters (It could be the data we use in our D3 graph)
+
+Saving data for the d3 plot
+<<<<<<< HEAD
+```{r}
+variable <- "Aang"
+including_main_characters <- F
+
+scene_character <- unique_avatar_character_scene |> filter(character==variable) |> select(scene_id) |> unique() |> pull()
+list<- as.array(scene_character)
+
+
+data <- unique_avatar_character_scene |> filter(scene_id %in% list,
+                                                character != variable) |> 
+  select(character,scene_id) |> distinct()
+
+if(!including_main_characters){
+  data <- data |> filter(!(character %in% main_cast))
+}
+
+
+data <- data |> 
+  group_by(character) |> 
+  summarise(value = n()) |> 
+  arrange(desc(value)) |> 
+  ungroup() |> head(10)
+
+data['color']='#6798DE'
+data
+
+write.csv(data, "Aang.csv", row.names = FALSE)
+```
+```{r}
+variable <- "Katara"
+including_main_characters <- F
+
+scene_character <- unique_avatar_character_scene |> filter(character==variable) |> select(scene_id) |> unique() |> pull()
+list<- as.array(scene_character)
+
+
+data <- unique_avatar_character_scene |> filter(scene_id %in% list,
+                                                character != variable) |> 
+  select(character,scene_id) |> distinct()
+
+if(!including_main_characters){
+  data <- data |> filter(!(character %in% main_cast))
+}
+
+
+data <- data |> 
+  group_by(character) |> 
+  summarise(value = n()) |> 
+  arrange(desc(value)) |> 
+  ungroup() |> head(10)
+
+data['color']='#3699B1'
+data
+
+write.csv(data, "Katara.csv", row.names = FALSE)
+```
+```{r}
+variable <- "Sokka"
+including_main_characters <- F
+
+scene_character <- unique_avatar_character_scene |> filter(character==variable) |> select(scene_id) |> unique() |> pull()
+list<- as.array(scene_character)
+
+
+data <- unique_avatar_character_scene |> filter(scene_id %in% list,
+                                                character != variable) |> 
+  select(character,scene_id) |> distinct()
+
+if(!including_main_characters){
+  data <- data |> filter(!(character %in% main_cast))
+}
+
+
+data <- data |> 
+  group_by(character) |> 
+  summarise(value = n()) |> 
+  arrange(desc(value)) |> 
+  ungroup() |> head(10)
+
+data['color']='#a1785c'
+data
+
+write.csv(data, "Sokka.csv", row.names = FALSE)
+```
+
+```{r}
+variable <- "Toph"
+including_main_characters <- F
+
+scene_character <- unique_avatar_character_scene |> filter(character==variable) |> select(scene_id) |> unique() |> pull()
+list<- as.array(scene_character)
+
+
+data <- unique_avatar_character_scene |> filter(scene_id %in% list,
+                                                character != variable) |> 
+  select(character,scene_id) |> distinct()
+
+if(!including_main_characters){
+  data <- data |> filter(!(character %in% main_cast))
+}
+
+
+data <- data |> 
+  group_by(character) |> 
+  summarise(value = n()) |> 
+  arrange(desc(value)) |> 
+  ungroup() |> head(10)
+
+data['color']='#73B067'
+data
+
+write.csv(data, "Toph.csv", row.names = FALSE)
+```
+
+```{r}
+variable <- "Zuko"
+including_main_characters <- F
+
+scene_character <- unique_avatar_character_scene |> filter(character==variable) |> select(scene_id) |> unique() |> pull()
+list<- as.array(scene_character)
+
+
+data <- unique_avatar_character_scene |> filter(scene_id %in% list,
+                                                character != variable) |> 
+  select(character,scene_id) |> distinct()
+
+if(!including_main_characters){
+  data <- data |> filter(!(character %in% main_cast))
+}
+
+
+data <- data |> 
+  group_by(character) |> 
+  summarise(value = n()) |> 
+  arrange(desc(value)) |> 
+  ungroup() |> head(10)
+
+
+data['color']='#EA666D'
+data
+
+write.csv(data, "Zuko.csv", row.names = FALSE)
+
+```
+
+
+
+Alluvia for interactions
+
+
+```{r}
+cast <- main_cast |> append("Iroh")
+data_alluvia<-data.frame(character_1=character(),
+                         character_2=character(),
+                         book=factor(),
+                         frequency=integer())
+for (variable in cast) {
+  scene_character <- unique_avatar_character_scene |> filter(character==variable) |> select(scene_id) |> unique() |> pull()
+list<- as.array(scene_character)
+
+
+data <- unique_avatar_character_scene |> filter(scene_id %in% list,
+                                                character != variable,
+                                                character %in% cast) |> 
+  select(character,scene_id,book) |> distinct()
+
+
+data <- data |> 
+  group_by(character,book) |> 
+  summarise(frequency = n(),.groups = 'drop') |> 
+  arrange(desc(frequency)) |> 
+  ungroup()
+
+colnames(data) <- c("character_2","book","frequency")
+data <- cbind(character_1= variable,data)
+
+data_alluvia <- rbind(data_alluvia,data)
+}
+data_alluvia
+
+```
+```{r,fig.height=10,fig.width=8}
+library(ggalluvial)
+interactions_alluvial<-
+  ggplot(data_alluvia,aes(axis1=character_1,axis2=character_2,y=frequency))+
+  geom_alluvium(color= "grey80",aes(fill=character_1))+
+  #geom_alluvium()+
+  geom_stratum()+
+  geom_text(stat = "stratum",aes(label = after_stat(stratum)),size = 2)+
+  facet_wrap(~ book,ncol = 2,scales = "free")+
+  scale_x_discrete(limits=c("",""))+
+  theme_avatar()+
+  labs(title="Interactions between the main cast per book",
+       y = "# of Scenes")+
+  theme(legend.position = "none")
+
+interactions_alluvial
+ggsave("../images/graphs/interactions_alluvial.png", 
+       plot = interactions_alluvial)
+  
+```
+Just out of curiosity, lets find out how many times the cabbage merchant appears in the show
+
+```{r}
+characters<-unique_avatar_character$character |> unique()
+characters[grepl("merchant", characters)]
+```
+
+```{r}
+cabbage<-unique_avatar_character |> filter(character=='Cabbage merchant')
+cabbage
+```
+```{r}
+cabbage$chapter<-factor(cabbage$chapter, levels = c("The King of Omashu","The Waterbending Scroll","The Serpent's Pass","The Tales of Ba Sing Se"))
+cabbage$book<-factor(cabbage$book,levels = c("Water","Earth","Fire"))
+```
+
+```{r}
+cabbages<-ggplot(cabbage, aes(x = chapter,
+                    y = length(character_words)*1.1, fill = book)) +
+  geom_bar(stat = "identity", color = "black") +  # Stacked bars
+  geom_text(aes(label = str_wrap(character_words, width = 15)), 
+            position = position_stack(vjust = 0.5), 
+            size = 2, 
+            color = "white") +  # Add text inside stacks
+  labs(
+    title = "Appearances of the Cabbage Merchant",
+    x = "Chapter",
+    y = "Participations",
+    fill = "Book"
+  ) +
+  scale_fill_manual(values=c("#6798DE","#73B067","#EA666D"))+
+  theme_avatar() +
+  theme(
+    #axis.text.x = element_text(angle = 45, hjust = 1),  # Rotate x-axis labels
+    axis.text.y = element_blank(),  # Remove y-axis text
+    axis.ticks.y = element_blank(),  # Remove y-axis ticks
+    panel.grid.major.y = element_blank()  # Remove y-axis grid lines
+  )
+
+cabbages
+ggsave("../images/graphs/cabbages.png", 
+       plot = cabbages)
 ```
 

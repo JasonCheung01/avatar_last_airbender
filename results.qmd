@@ -111,7 +111,6 @@ graphs being on the same scale.
 ### IMDb Ratings of all Episodes Colored by Book Chapter  
 
 ![IMDb Rating of all Episodes in Order](images/graphs/avatar_show_imdb_rating_all_episode.png)
-
 To resolve the above graph challenge of comparing episode ratings with other 
 Book Chapters, we created a Cleveland dot plot where we displayed all the 
 episode names, sorted them based on the IMDb rating in descending order, and 
@@ -134,4 +133,70 @@ form comparisons regarding all the episode IMDB ratings in each book chapter
 and gain further observation and insight about them, which would not have been 
 possible or rather tricky with just the three-faceted graph alone. 
 
+### Does a particular main character's appearance in the episode impact the IMDB Rating positively or negatively?
 
+Since we only have ratings per episode, one way to approach this question is to calculate the average rating for episodes where each character appears. However, this approach requires careful consideration to avoid two main issues:
+
+1.  **Background Characters:** Many minor characters may appear only once in a highly-rated episode. Even if they are irrelevant to the plot, their presence would be associated with a very high score.
+
+2.  **Limited Appearances:** Even if a character is crucial to an exceptional episode, if they appear in only one episode, it’s difficult to conclude that the high rating is directly because of them.
+
+To address these challenges, we applied the following filters to the data:
+
+1.  **Character Frequency:** We only considered characters who were relevant in more than one episode.
+
+2.  **Defining Relevance:** A character was deemed relevant in an episode if they had at least 15 participations in that episode. This threshold was chosen because the average number of participations for main characters in an episode ranges between 17 and 35.
+
+After applying these filters, we produced the following graph:
+
+![Average IMDb Rating for characters](images/graphs/average_ratings_character.png)
+
+The graph reveals that episodes where the two main antagonists of the show, **Ozai** and **Azula**, had significant relevance tend to have the highest ratings. This confirms the notion that a great antagonist is vital to a show’s success.
+
+**Azula**’s case is particularly noteworthy. Among the top five characters, she stands out as the only one with more than three relevant episodes. With seven episodes and the second-highest average rating, Azula demonstrates consistency, proving how much fans love to hate her.
+
+But we can’t discuss Azula without mentioning her brother, **Zuko**—a fan favorite and the main cast member with the highest average rating. Over 27 episodes where Zuko was relevant, he achieved an impressive average rating of approximately 8.8.
+
+In the middle of the graph, we find two other fan favorites, **Toph** and **Iroh**. While their averages are below 8.8, both characters maintained strong and consistent ratings across more than ten episodes in which they were relevant.
+
+At the bottom of the graph, we see the three main characters. However, since they were relevant in almost every episode of the show, their averages reflect the overall show rating rather than individual character-driven ratings.
+
+Excluding the main characters, the episodes with the lowest fan ratings were those where **Suki** and **Jet** had significant relevance. Interestingly, both characters had romantic storylines with members of the main cast.
+
+## How often does each pair of main characters interact with each other? For instance, how often does Aang interact with Katara, Sokka, Toph, or Zuko throughout the show? What about the others? How often does Katara interact with Sokka, Toph, Zuko, etc?
+
+### Top Interactions Throughout the Entire Show
+
+![Top 10 Interactions Throughout Etire Show](images/graphs/top10_interactions.png)
+
+We define an interaction between a set of characters as occurring whenever they share a specific scene in the show. This metric allows us to quantify and highlight the most significant character dynamics throughout the series. As the graph illustrates, it’s no surprise that the original **Team Avatar**—**Aang**, **Katara**, and **Sokka**—leads with the highest number of interactions.
+
+One notable observation is the presence of Iroh among the top interactions, despite not being part of the main cast. His inclusion highlights his pivotal role in the show, particularly through his relationship with Zuko, which is central to Zuko’s character arc.
+
+### Top Interactions Per Book
+
+![Top 10 Interactions Per Book](images/graphs/top10_interactions_book.png)
+
+In this graph, we can see the evolution of **Team Avatar**, particularly the integration of **Toph** in the second book. Starting in the second book, the set of **Aang**, **Katara**, and **Sokka** began to share fewer scenes, and by the third book, the set with the most scenes became **Aang**, **Katara**, **Sokka**, and **Toph**.
+
+The inclusion of **Zuko** into **Team Avatar** is less apparent, as it becomes increasingly challenging to have full scenes featuring five or more characters simultaneously. However, in the third book, we see him begin to interact more consistently with the rest of the main cast.
+
+Notably, the only two pairs of characters that remain in the top 10 interactions throughout the show are **Aang** and **Katara**, and **Aang** and **Zuko**. Even iconic interactions like **Iroh** and **Zuko**, as well as **Katara** and **Sokka**, do not make it into the top 10 by the third book.
+
+### How often does each pair of main characters interact with each other?
+
+While measuring interactions between characters as sets is insightful—especially for observing team dynamics (as we did with **Team Avatar**)—it’s equally interesting to examine interactions between individual pairs of characters.
+
+![Interactions between each pair of main characters](images/graphs/interactions_alluvial.png)
+
+The graph shows how the main cast’s interactions evolved from primarily involving one or two characters in the first book to involving up to four by the third book. An exception is **Zuko**, who in the first book primarily interacted with his uncle **Iroh** but also had minor interactions with the rest of the main cast. In the second book, nearly all his interactions were limited to **Iroh**, but by the third book, his interactions with his uncle disappeared as he began consistently engaging with the rest of the main characters.
+
+Additionally, we notice how the interactions among **Aang**, **Katara**, and **Sokka** remained consistently high throughout the series, even as their interactions expanded to include other characters in later seasons.
+
+### Top Characters with the Most Solo Scenes
+
+While scenes with multiple characters are crucial, there are moments when the show focuses on a single character to drive the story or highlight personal growth. Here is the list of the top 10 characters with the most solo scenes:
+
+![Top 10 Characters with the Most Solo Scenes](images/graphs/top10_character_solo_scene.png)
+
+As expected, the main characters dominate the top 10. However, this graph also features new characters not previously highlighted, such as **Piandao** and **Roku**, who played significant roles in the episodes *“Sokka’s Master”* and *“The Avatar and the Fire Lord”*, respectively.
