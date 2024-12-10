@@ -4,7 +4,13 @@
   * {
     font-family: sans-serif;
   }
-</style> 
+</style>
+
+<input type="radio" name="character" value="Aang">Aang</input>
+<input type="radio" name="character" value="Katara">Katara</input>
+<input type="radio" name="character" value="Sokka">Sokka</input>
+<input type="radio" name="character" value="Toph">Toph</input>
+<input type="radio" name="character" value="Zuko">Zuko</input>
 
 <div id="plot">
 </div>

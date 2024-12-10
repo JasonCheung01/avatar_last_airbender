@@ -3,7 +3,7 @@
   const w = 400;
   const h = 300;
   const margin = {top: 25, right: 10, bottom: 25,
-      left: 40};
+      left: 80};
   const innerWidth = w - margin.left - margin.right;
   const innerHeight = h - margin.top - margin.bottom;
   
@@ -24,7 +24,6 @@
                  {character: "May", value: 70, color:"#a1785c"},
                  {character: "Jun", value: 270, color:"#a1785c"}]
                  
-  
 const rowConverter = function (d) {
   return {
     character: d.character,
@@ -32,10 +31,51 @@ const rowConverter = function (d) {
     color: d.color
     }
 };  
-
+                 
+// data Aang  
 d3.csv("https://raw.githubusercontent.com/JasonCheung01/avatar_last_airbender/refs/heads/additional_graphs/data/Aang.csv", rowConverter)
   .then(function(data) {
     data_aang= data;
+
+  })
+  .catch(function(error) {
+
+  });
+  
+// data Katara  
+d3.csv("https://raw.githubusercontent.com/JasonCheung01/avatar_last_airbender/refs/heads/additional_graphs/data/Katara.csv", rowConverter)
+  .then(function(data) {
+    data_katara= data;
+
+  })
+  .catch(function(error) {
+
+  });
+  
+// data Sokka  
+d3.csv("https://raw.githubusercontent.com/JasonCheung01/avatar_last_airbender/refs/heads/additional_graphs/data/Sokka.csv", rowConverter)
+  .then(function(data) {
+    data_sokka= data;
+
+  })
+  .catch(function(error) {
+
+  });
+  
+// data Toph
+d3.csv("https://raw.githubusercontent.com/JasonCheung01/avatar_last_airbender/refs/heads/additional_graphs/data/Toph.csv", rowConverter)
+  .then(function(data) {
+    data_toph= data;
+
+  })
+  .catch(function(error) {
+
+  });
+  
+// data Zuko
+d3.csv("https://raw.githubusercontent.com/JasonCheung01/avatar_last_airbender/refs/heads/additional_graphs/data/Zuko.csv", rowConverter)
+  .then(function(data) {
+    data_zuko= data;
 
   })
   .catch(function(error) {
@@ -56,8 +96,14 @@ let bardata = data_test;
 
 if(character=='Aang'){
   bardata = data_aang;
-} else{
-  bardata = data_test;
+} else if(character=='Katara'){
+  bardata = data_katara;
+}else if(character=='Sokka'){
+  bardata = data_sokka;
+}else if(character=='Toph'){
+  bardata = data_toph;
+}else if(character=='Zuko'){
+  bardata = data_zuko;
 }
 
 
