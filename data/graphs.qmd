@@ -120,27 +120,49 @@ top10_character_dialogue_per_book <-
 top10_character_dialogue_per_book 
 ```
 
+```{r}
+# Add labels at the end of each line
+end_labels <- top10_character_dialogue_per_book |>
+  group_by(character) |>
+  filter(frequency == max(frequency)) |>
+  ungroup() 
+
+end_labels
+```
+
 
 ```{r}
-library(RColorBrewer)
+library(RColorBrewer) 
+library(ggrepel)  
 
-top10_character_dialogue_per_book_graph <- 
-  ggplot(top10_character_dialogue_per_book, 
-       aes(x = fct_relevel(book, "Water"), 
-           y = frequency, group = character, color = character)) +
-  geom_line() +   
-  scale_colour_brewer(palette = "Paired") + 
-  # scale_color_avatar(palette = "AirNomads") + 
+top10_character_dialogue_per_book_graph <-
+  ggplot(top10_character_dialogue_per_book,
+         aes(x = fct_relevel(book, "Water"),
+             y = frequency, group = character)) +
+  geom_line(aes(color = character)) +
+  # geom_text_repel(
+  #   data = end_labels,
+  #   aes(label = character),
+  #   size = 3, 
+  #   direction = "y", 
+  #   hjust = "right",  
+  #   nudge_x = 1
+  # ) +
+  # scale_colour_brewer(palette = "Set3") +
+  # scale_color_avatar(palette = "AirNomads") +
   # scale_y_continuous(breaks = seq(0, max(top10_character_dialogue_per_book$frequency),
   #                                 by = 50)) +
+  
   labs(title = "Top 10 Characters with the Most Lines per Book Chapter",
-       x = "Book Chapter", 
+       x = "Book Chapter",
        y = "Character Line Frequency") +
   theme_avatar()  
+  # theme(legend.position = "none")
+  # theme()
 
-top10_character_dialogue_per_book_graph 
-
-ggsave("../images/graphs/top10_character_dialogue_per_book.png", 
+top10_character_dialogue_per_book_graph
+# 
+ggsave("../images/graphs/top10_character_dialogue_per_book.png",
        plot = top10_character_dialogue_per_book_graph)
 ```
 
