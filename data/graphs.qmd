@@ -604,10 +604,9 @@ data
 
 write.csv(data, "Toph.csv", row.names = FALSE)
 ```
-=======
->>>>>>> db923cf2b74250fe162475962cdf84786ce2fab0
+
 ```{r}
-variable <- "Aang"
+variable <- "Zuko"
 including_main_characters <- F
 
 scene_character <- unique_avatar_character_scene |> filter(character==variable) |> select(scene_id) |> unique() |> pull()
@@ -629,17 +628,12 @@ data <- data |>
   arrange(desc(value)) |> 
   ungroup() |> head(10)
 
-<<<<<<< HEAD
+
 data['color']='#EA666D'
 data
 
 write.csv(data, "Zuko.csv", row.names = FALSE)
-=======
-data['color']='#3699B1'
-data
 
-write.csv(data, "Aang.csv", row.names = FALSE)
->>>>>>> db923cf2b74250fe162475962cdf84786ce2fab0
 ```
 
 

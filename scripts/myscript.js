@@ -3,27 +3,27 @@
   const w = 400;
   const h = 300;
   const margin = {top: 25, right: 10, bottom: 25,
-<<<<<<< HEAD
       left: 40};
   const innerWidth = w - margin.left - margin.right;
   const innerHeight = h - margin.top - margin.bottom;
+  
+  
+  // add svg
+
+  const svg = d3.select("#plot")
+    .append("svg")
+      .attr("width", w)
+      .attr("height", h);
 
   // getting the data
-  const data_test = [{character: "Jan", value: 300, color:"#a1785c"},
-=======
-      left: 30};
-  const innerWidth = w - margin.left - margin.right;
-  const innerHeight = h - margin.top - margin.bottom;
 
-  const data = [{character: "Jan", value: 300, color:"#a1785c"},
->>>>>>> db923cf2b74250fe162475962cdf84786ce2fab0
+  const data_test = [{character: "Jan", value: 300, color:"#a1785c"},
                  {character: "Feb", value: 100, color:"#a1785c"},
                  {character: "Mar", value: 150, color:"#a1785c"},
                  {character: "Apr", value: 220, color:"#a1785c"},
                  {character: "May", value: 70, color:"#a1785c"},
                  {character: "Jun", value: 270, color:"#a1785c"}]
                  
-<<<<<<< HEAD
   
 const rowConverter = function (d) {
   return {
@@ -42,12 +42,6 @@ d3.csv("https://raw.githubusercontent.com/JasonCheung01/avatar_last_airbender/re
 
   });
                  
-// add svg
-
-  const svg = d3.select("#plot")
-    .append("svg")
-      .attr("width", w)
-      .attr("height", h);
       
       
 // Input                  
@@ -66,16 +60,10 @@ if(character=='Aang'){
   bardata = data_test;
 }
 
-  const yScale = d3.scaleBand()
-      .domain(bardata.map(d => d.character))
-      .range([0,innerHeight ])
-=======
-const bardata = data
 
   const yScale = d3.scaleBand()
       .domain(bardata.map(d => d.character))
-      .range([innerHeight, 0])
->>>>>>> db923cf2b74250fe162475962cdf84786ce2fab0
+      .range([0, innerHeight])
       .paddingInner(.1);
 
   const xScale = d3.scaleLinear()
@@ -88,15 +76,6 @@ const bardata = data
   const yAxis = d3.axisLeft()
       .scale(yScale);
 
-<<<<<<< HEAD
-=======
-// add svg
-
-  const svg = d3.select("#plot")
-    .append("svg")
-      .attr("width", w)
-      .attr("height", h);
->>>>>>> db923cf2b74250fe162475962cdf84786ce2fab0
 
 // add background rectangle
 
@@ -117,11 +96,8 @@ const bardata = data
 
   bars.enter().append("rect")
       .attr("x", d => 0)
-<<<<<<< HEAD
       .attr("y", d => yScale(d.character))
-=======
-      .attr("y", d => innerHeight-yScale(d.character)-yScale.bandwidth())
->>>>>>> db923cf2b74250fe162475962cdf84786ce2fab0
+      .attr("y", d => yScale(d.character))
       .attr("height", yScale.bandwidth())
       .attr("width", d => xScale(d.value))
       .attr("fill", d => d.color);
@@ -137,9 +113,7 @@ const bardata = data
       .attr("class", "yAxis")
       .attr("transform", `translate (${margin.left}, ${margin.top})`)
       .call(yAxis);
-<<<<<<< HEAD
       
 });
-=======
->>>>>>> db923cf2b74250fe162475962cdf84786ce2fab0
+
                         
