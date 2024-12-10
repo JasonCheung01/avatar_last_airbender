@@ -73,7 +73,7 @@ head(full_avatar)
 
 ```{r}
 full_avatar <- as.data.frame(full_avatar) 
-write.csv(full_avatar, "../data/avatar_data.csv", row.names = FALSE)
+write.csv(full_avatar, "avatar_data.csv", row.names = FALSE)
 ```
 
 ```{r} 

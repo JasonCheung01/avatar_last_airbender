@@ -1,0 +1,341 @@
+# Graphs Creation
+
+Calling our Pre-processed Data
+```{r}
+library(tidyverse) 
+library(dplyr)  
+
+avatar <- read.csv("avatar_data.csv", header = TRUE) 
+avatar 
+```
+
+```{r}
+avatar_character <- avatar |>
+  select(book, chapter, chapter_num, character, character_words) 
+
+head(avatar_character)
+```
+
+
+Graphs for characters dialogue throughout show
+```{r}
+# For this data, I am going to remove data that have same character_word as I 
+# don't want to double word count. Also, because we are not working with scene 
+# description, it should be okay 
+# https://www.datanovia.com/en/lessons/identify-and-remove-duplicate-data-in-r
+
+unique_avatar_character <- avatar_character[!duplicated(avatar_character), ]  
+unique_avatar_character
+```
+
+```{r}
+# This data contains the amount of dialogue for each character throughout  
+# entirety of show 
+character_dialogue <- unique_avatar_character |> 
+  group_by(character) |> 
+  summarise(frequency = n()) |> 
+  arrange(desc(frequency)) |> 
+  ungroup()
+
+character_dialogue
+```
+
+```{r} 
+# Get the top 10 character
+top10_character_dialogue <- character_dialogue |> 
+  head(10) |> 
+  select(character)  
+
+top10_character_dialogue
+```
+
+```{r}
+# devtools::install_github("Ryo-N7/tvthemes")
+```
+
+
+```{r}  
+library(tvthemes)
+library(ggplot2) 
+# import_avatar()
+# library(extrafont) 
+# loadfonts() 
+# https://ryo-n7.github.io/tvthemes/articles/examples.html 
+
+top10_character_dialogue_graph <- 
+  character_dialogue |> 
+  head(10) |>  
+  ggplot(aes(y = fct_reorder(character, frequency), 
+             x = frequency)) +
+  geom_col(fill = "#a1785c") + 
+  # ylab("") + 
+  labs(title = "Top 10 Characters with the Most Lines", 
+       x = "# of Lines", 
+       y = "Characters") +  
+  scale_x_continuous(breaks = seq(0, max(character_dialogue$frequency), 
+                                  by = 200)) +  
+  theme_avatar()
+
+top10_character_dialogue_graph 
+
+ggsave("../images/graphs/top10_character_dialogue.png", 
+       plot = top10_character_dialogue_graph)
+
+```
+
+
+Graph to see top 10 character dialogue changes/fluctuate per book 
+```{r} 
+# Get the top 10 character dialogue per book
+character_dialogue_per_book <- 
+  unique_avatar_character |>
+  group_by(book, character) |>
+  summarise(frequency = n()) |> 
+  ungroup() |>
+  arrange(book, desc(frequency)) 
+
+character_dialogue_per_book
+```
+
+```{r} 
+# This gets all combination of book with top 10 characters
+all_combinations <- expand.grid(book = unique(unique_avatar_character$book),
+                                character = top10_character_dialogue$character)
+
+# all_combinations 
+```
+
+```{r}
+# This helps if one of the top 10 character did appear or talk until later in 
+# the book. Thus, if this is the case set them to 0 for books they do not talk 
+# or appear in 
+# https://tidyr.tidyverse.org/reference/replace_na.html 
+
+top10_character_dialogue_per_book <-
+  all_combinations |>
+  left_join(character_dialogue_per_book, by = c("book", "character")) |> 
+  replace_na(list(frequency = 0))
+  # group_by(book, character)
+
+top10_character_dialogue_per_book 
+```
+
+```{r}
+# Add labels at the end of each line
+end_labels <- top10_character_dialogue_per_book |>
+  group_by(character) |>
+  filter(frequency == max(frequency)) |>
+  ungroup() 
+
+end_labels
+```
+
+
+```{r}
+library(RColorBrewer) 
+library(ggrepel)  
+
+top10_character_dialogue_per_book_graph <-
+  ggplot(top10_character_dialogue_per_book,
+         aes(x = fct_relevel(book, "Water"),
+             y = frequency, group = character)) +
+  geom_line(aes(color = character)) +
+  # geom_text_repel(
+  #   data = end_labels,
+  #   aes(label = character),
+  #   size = 3, 
+  #   direction = "y", 
+  #   hjust = "right",  
+  #   nudge_x = 1
+  # ) +
+  # scale_colour_brewer(palette = "Set3") +
+  # scale_color_avatar(palette = "AirNomads") +
+  # scale_y_continuous(breaks = seq(0, max(top10_character_dialogue_per_book$frequency),
+  #                                 by = 50)) +
+  
+  labs(title = "Top 10 Characters with the Most Lines per Book Chapter",
+       x = "Book Chapter",
+       y = "Character Line Frequency") +
+  theme_avatar()  
+  # theme(legend.position = "none")
+  # theme()
+
+top10_character_dialogue_per_book_graph
+# 
+ggsave("../images/graphs/top10_character_dialogue_per_book.png",
+       plot = top10_character_dialogue_per_book_graph)
+```
+
+
+Graph to see the top 10 characters with Most Dialogue/Line and see how many 
+episodes they appear in  
+```{r}
+# Jet has that many lines even though he only appeared once? Never mind, by 
+# filtering it seems like he appears more than just once since I recall him 
+# only appearing in his "Jet" episode
+
+# unique_avatar_character |> 
+#   filter(character == "Jet") |> 
+#   distinct(chapter) |> 
+#   print()
+```
+
+```{r}
+top10_character_episode_appearance <- 
+  unique_avatar_character |> 
+  filter(character %in% top10_character_dialogue$character) |>
+  distinct(character, chapter) |> 
+  count(character) |> 
+  rename(episode_appearance = n) 
+
+top10_character_episode_appearance
+```
+
+```{r} 
+top10_character_episode_appearance_graph <-  
+  top10_character_episode_appearance |>
+  ggplot(aes(x = episode_appearance,
+             y = fct_reorder(character, episode_appearance))) + 
+  geom_col(fill = "#a1785c") + 
+  # scale_x_continuous(breaks = seq(0, max(top10_character_episode_appearance$episode_appearance),
+  #                               by = 5)) + 
+  labs(title = "Top 10 Characters and Their Episode Appearances", 
+       x = "Episode Appearances", 
+       y = "Character") + 
+  theme_avatar() 
+
+top10_character_episode_appearance_graph 
+
+ggsave("../images/graphs/top10_character_episode_appearance.png", 
+       plot = top10_character_episode_appearance_graph) 
+```
+
+
+Graph to see IMDb rating of each episodes per season 
+```{r}
+avatar_show_imdb_rating_unique <- avatar |>
+  select(book, book_num, chapter, chapter_num, imdb_rating) |> 
+  distinct(book, chapter, chapter_num, imdb_rating) 
+
+avatar_show_imdb_rating_unique
+```
+
+```{r}
+avatar_show_imdb_rating_unique$book <-
+  fct_relevel(avatar_show_imdb_rating_unique$book, "Water")
+```
+
+```{r} 
+# Used geom path to hopefully show gap of missing but sadly the missing is the 
+# last episode 
+# https://stackoverflow.com/questions/26140004/how-to-plot-na-gaps-using-ggplot2 
+
+avatar_show_imdb_rating_per_book_graph <-  
+  avatar_show_imdb_rating_unique |>  
+  ggplot(aes(x = chapter_num, 
+             y = imdb_rating)) +
+  geom_path() +  
+  geom_point(color = "#a1785c") +
+  scale_y_continuous(limits = c(6.5, 10), breaks = seq(6.5, 10, by = 0.5)) +
+  labs(title = "IMDb Rating of Each Episode Per Book Chapter", 
+       y = "IMDb Rating", 
+       x = "Episodes") +
+  theme_avatar() +
+  facet_wrap(~ book)  
+
+avatar_show_imdb_rating_per_book_graph 
+
+ggsave("../images/graphs/avatar_show_imdb_rating_per_book.png", 
+       plot = avatar_show_imdb_rating_per_book_graph) 
+```
+
+
+Graph to see IMDb rating of all episode throughout show and their corresponding 
+book
+```{r}
+avatar_show_imdb_rating_unique$chapter <- fct_reorder(
+  as_factor(avatar_show_imdb_rating_unique$chapter), 
+  avatar_show_imdb_rating_unique$imdb_rating, 
+  .na_rm = FALSE
+) 
+
+# levels(avatar_show_imdb_rating_unique$chapter) 
+
+# Make the episode with NA the first
+avatar_show_imdb_rating_unique$chapter = fct_relevel(
+  avatar_show_imdb_rating_unique$chapter, "The Siege of the North, Part 2") 
+
+# levels(avatar_show_imdb_rating_unique$chapter) 
+```
+
+```{r}
+levels(avatar_show_imdb_rating_unique$book)
+```
+
+```{r}
+# For some reason I had to manually revert it back to the original level order 
+# as it did not work properly with the modified level order. I suspect this is 
+# because of how color is working with theme_avatar but not 100% sure 
+
+avatar_show_imdb_rating_unique$book <- 
+  fct_relevel(avatar_show_imdb_rating_unique$book, "Fire", "Earth", "Water") 
+
+levels(avatar_show_imdb_rating_unique$book)
+```
+
+```{r, fig.width=12, fig.height=7} 
+avatar_show_imdb_rating_all_episode_graph <-  
+  avatar_show_imdb_rating_unique |>  
+  ggplot(aes(x = imdb_rating, 
+             y = chapter, colour = book)) +
+  geom_point() +    
+  labs(title = "IMDb Ratings of All Episodes Ranked", 
+       x = "IMDb Rating", 
+       y = "Episode Name") +
+  theme_avatar() 
+
+avatar_show_imdb_rating_all_episode_graph 
+
+ggsave("../images/graphs/avatar_show_imdb_rating_all_episode.png", 
+       plot = avatar_show_imdb_rating_all_episode_graph) 
+```
+
+
+
+Graph to see how often each of the main cast interact with one another  
+(We can probably use this data for our D3 graph where can let user hover each 
+main character to see amount of interaction with other main character)
+
+```{r}
+character_interaction <- 
+  unique_avatar_character |> 
+  select(book, character, character_words) 
+
+character_interaction
+```
+
+```{r}
+# This is our interpretation of who we believe are truly the main characters 
+# for this show while the others are supporting characters 
+main_cast <- c('Aang', 'Sokka', 'Katara', 'Zuko', 'Toph')
+main_cast
+```
+
+```{r}
+# Following code below was from the help of GPT  
+
+# Create a single regex pattern for main cast members
+main_cast_pattern <- paste0("\\b(", paste(main_cast, collapse = "|"), ")\\b")
+
+# Process interactions
+interaction_counts <- character_interaction |>
+  mutate(mentioned = str_extract_all(character_words, main_cast_pattern)) |>  
+  unnest(mentioned) |>
+  filter(character %in% main_cast, mentioned %in% main_cast, character != mentioned) |> 
+  mutate(pair = pmap_chr(list(character, mentioned), ~ paste(sort(c(...)), collapse = " - "))) |> 
+  count(pair, name = "frequency") |>
+  separate(pair, into = c("character1", "character2"), sep = " - ") 
+
+interaction_counts
+```
+
