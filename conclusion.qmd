@@ -1,7 +1,7 @@
 # Conclusion 
 
 ## Main Takeaways
-A few main takeaways that we got from exploring the *appa* R package data set 
+A few main takeaways that we got from exploring the *`appa`* R package data set 
 created by Avery Robbins were primarily: 
 
 1. The importance of each character in Team Avatar and their key role throughout 
@@ -39,8 +39,8 @@ color from ggplot2.
 ## Future Direction  
 Given our limited time constraints, one future direction we would have liked to 
 consider is finding another dataset that works well with this dataset containing 
-information to strengthen our exploration. For example, a dataset that includes 
-the following category: 
+information to further expand our exploration. For example, a dataset that 
+includes the following category: 
 
 * Having each character’s gender 
 * Location of where characters were during the episodes
@@ -50,11 +50,45 @@ the following category:
 
 Another future direction is possibly comparing our exploration to Legend of 
 Korra, as it is the sequel to Avatar the Last Airbender. Therefore, we can see 
-if the two shows are entirely different or similar despite being animated in 
+if the two shows are entirely different or similar as they were animated in 
 the same universe.  
 
 <div style="text-align: center;">
   <img src="images/team_avatar_hd.jpg" alt="team_avatar_hd" style="width: 90%;"/>
+</div> 
+
+<div style="text-align: center;">
+  <img src="images/team_korra.jpg" alt="team_korra" style="width: 90%;"/>
 </div>
 
-## Lessons Learned
+## Lessons Learned 
+Having spent a generous amount of time exploring and learning the capability of 
+this data set, along with the visualization that we created towards the 
+questions we wanted to explore, the main lessons that we learned were:
+
+1. How powerful and purposeful graphs can be, as they can lead to many new 
+profound questions and curiosity along the way. For instance, we did not 
+initially plan to look at episode appearances for each character. However, 
+that changed after seeing the results of the total amount of dialogues each 
+character had, leading us to expand from there and discover more analysis on 
+the importance and impact of each character. The same case for our exploration 
+on interactivity between each character in the show. 
+
+2. Refraining our under-estimation of dense datasets with limited column 
+amounts. Initially, we thought we should increase the number of columns for 
+this data set as it may make our analysis generic and bland. However, this was 
+not the case, as we were able to dive even more deeply than expected as we 
+initially thought of including graphs of the show's directors and whether they 
+influenced the show's success. But that was not needed, given our curiosity 
+towards learning more about our initial questions.
+
+## Appreciation 
+Thank you to everyone reading this and for taking the time to read our work. 
+Please let us know if there is anything more you want to see or if there are 
+other possible questions you would like us to explore. With that, 
+*Appa, Yip Yip* 
+
+<div style="text-align: center;">
+  <img src="images/avatar_meetup.jpg" alt="avatar_appreciation" 
+  style="width: 90%;"/>
+</div>
