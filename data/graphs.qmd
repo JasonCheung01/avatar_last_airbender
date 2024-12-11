@@ -336,16 +336,69 @@ average_ratings_character <-
   rating_character |> filter(n_chapters>1) |>  
   ggplot(aes(x = mean_rating, 
              y = fct_reorder(character, mean_rating, .desc = FALSE), 
-             size = n_chapters)) +
-  geom_point(colour="#a1785c") +    
-  labs(title = "Average rating for characters with more than 15 participations in more than 1 episode", 
+             size = n_chapters,
+             #shape = n_chapters
+             )) +
+  geom_point(colour="#a1785c") +
+  #scale_shape_binned(breaks = c(10, 20, 30,40, 50), guide = guide_legend(reverse = FALSE)) +
+  labs(title = "Average Ratings for Characters with Over 15 Appearances Per Episodes", 
        x = "IMDb Rating", 
-       y = "Character") +
+       y = "Character",
+       size = "Number of Episodes") +
   theme_avatar() 
 
 average_ratings_character 
 
 ggsave("../images/graphs/average_ratings_character.png", 
+       plot = average_ratings_character) 
+```
+Option 2 changing shapes:
+```{r}
+average_ratings_character <-  
+  rating_character |> filter(n_chapters>1) |>  
+  ggplot(aes(x = mean_rating, 
+             y = fct_reorder(character, mean_rating, .desc = FALSE), 
+             #size = n_chapters,
+             shape = n_chapters
+             )) +
+  geom_point(colour="#a1785c",size=3) +
+  scale_shape_binned(breaks = c(10, 20, 30,40, 50,60)) +
+  labs(title = "Average Ratings for Characters with Over 15 Appearances Per Episodes", 
+       x = "IMDb Rating", 
+       y = "Character",
+       shape = "Number of Episodes") +
+  theme_avatar() 
+
+average_ratings_character 
+
+ggsave("../images/graphs/average_ratings_character_shape.png", 
+       plot = average_ratings_character) 
+```
+Option 3:
+```{r}
+average_ratings_character <-  
+  rating_character |> filter(n_chapters>1) |>  
+  ggplot(aes(x = mean_rating, 
+             y = fct_reorder(character, mean_rating, .desc = FALSE), 
+             size = n_chapters,
+             #shape = n_chapters
+             )) +
+  geom_point(colour="#a1785c") +
+  #scale_shape_binned(breaks = c(10, 20, 30,40, 50,60)) +
+  geom_text(aes(label = n_chapters), 
+            hjust = -0.8, 
+            size = 3) + 
+  labs(title = "Average Ratings for Characters with Over 15 Appearances Per Episodes", 
+       x = "IMDb Rating", 
+       y = "Character",
+       size = "Number of Episodes",
+       caption = "Numbers next to points represent the number of episodes") +
+  theme_avatar()+
+  theme(legend.position = "None")
+
+average_ratings_character 
+
+ggsave("../images/graphs/average_ratings_character_label.png", 
        plot = average_ratings_character) 
 ```
 
@@ -450,6 +503,12 @@ top10_interactions_graph
 ggsave("../images/graphs/top10_interactions.png", 
        plot = top10_interactions_graph)
 ```
+```{r}
+interactions |> filter(num_characters_scene>1) |> 
+  head(10) 
+```
+
+
 ```{r}
 ### Top charcters with the most solo Scenes
 top10_characters_solo_scene <- 
