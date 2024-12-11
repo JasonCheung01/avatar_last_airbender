@@ -32,55 +32,31 @@ const rowConverter = function (d) {
     }
 };  
                  
-// data Aang  
-d3.csv("https://raw.githubusercontent.com/JasonCheung01/avatar_last_airbender/refs/heads/main/data/Aang.csv", rowConverter)
-  .then(function(data) {
-    data_aang= data;
+// Extract branch name from the URL or use "main" as the default
+let branchName = "main"; // Default branch
 
-  })
-  .catch(function(error) {
+// Base URL for the repository
+const baseURL = `https://raw.githubusercontent.com/JasonCheung01/avatar_last_airbender/refs/heads/${branchName}/data/`;
 
-  });
-  
-// data Katara  
-d3.csv("https://raw.githubusercontent.com/JasonCheung01/avatar_last_airbender/refs/heads/main/data/Katara.csv", rowConverter)
-  .then(function(data) {
-    data_katara= data;
+// Character data files
+const characters = ["Aang", "Katara", "Sokka", "Toph", "Zuko"];
 
-  })
-  .catch(function(error) {
+// Object to store all datasets
+const datasets = {};
 
-  });
-  
-// data Sokka  
-d3.csv("https://raw.githubusercontent.com/JasonCheung01/avatar_last_airbender/refs/heads/main/data/Sokka.csv", rowConverter)
-  .then(function(data) {
-    data_sokka= data;
+// Function to load data for each character
+characters.forEach(character => {
+  d3.csv(`${baseURL}${character}.csv`, rowConverter)
+    .then(function(data) {
+      datasets[character.toLowerCase()] = data; // Store the data using character name as key
+      console.log(`Data loaded for ${character}:`, data);
+    })
+    .catch(function(error) {
+      console.error(`Error loading data for ${character}:`, error);
+    });
+});
 
-  })
-  .catch(function(error) {
-
-  });
-  
-// data Toph
-d3.csv("https://raw.githubusercontent.com/JasonCheung01/avatar_last_airbender/refs/heads/main/data/Toph.csv", rowConverter)
-  .then(function(data) {
-    data_toph= data;
-
-  })
-  .catch(function(error) {
-
-  });
-  
-// data Zuko
-d3.csv("https://raw.githubusercontent.com/JasonCheung01/avatar_last_airbender/refs/heads/main/data/Zuko.csv", rowConverter)
-  .then(function(data) {
-    data_zuko= data;
-
-  })
-  .catch(function(error) {
-
-  });
+// datasets will hold the loaded data for all characters
                  
       
       
@@ -95,15 +71,15 @@ d3.selectAll('input[name="character"]')
 let bardata = data_test;
 
 if(character=='Aang'){
-  bardata = data_aang;
+  bardata = datasets.aang;
 } else if(character=='Katara'){
-  bardata = data_katara;
+  bardata = datasets.katara;
 }else if(character=='Sokka'){
-  bardata = data_sokka;
+  bardata = datasets.sokka;
 }else if(character=='Toph'){
-  bardata = data_toph;
+  bardata = datasets.toph;
 }else if(character=='Zuko'){
-  bardata = data_zuko;
+  bardata = datasets.zuko;
 }
 
 
