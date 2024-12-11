@@ -33,7 +33,7 @@ const rowConverter = function (d) {
 };  
                  
 // data Aang  
-d3.csv("https://raw.githubusercontent.com/JasonCheung01/avatar_last_airbender/refs/heads/additional_graphs/data/Aang.csv", rowConverter)
+d3.csv("https://raw.githubusercontent.com/JasonCheung01/avatar_last_airbender/refs/heads/main/data/Aang.csv", rowConverter)
   .then(function(data) {
     data_aang= data;
 
@@ -43,7 +43,7 @@ d3.csv("https://raw.githubusercontent.com/JasonCheung01/avatar_last_airbender/re
   });
   
 // data Katara  
-d3.csv("https://raw.githubusercontent.com/JasonCheung01/avatar_last_airbender/refs/heads/additional_graphs/data/Katara.csv", rowConverter)
+d3.csv("https://raw.githubusercontent.com/JasonCheung01/avatar_last_airbender/refs/heads/main/data/Katara.csv", rowConverter)
   .then(function(data) {
     data_katara= data;
 
@@ -53,7 +53,7 @@ d3.csv("https://raw.githubusercontent.com/JasonCheung01/avatar_last_airbender/re
   });
   
 // data Sokka  
-d3.csv("https://raw.githubusercontent.com/JasonCheung01/avatar_last_airbender/refs/heads/additional_graphs/data/Sokka.csv", rowConverter)
+d3.csv("https://raw.githubusercontent.com/JasonCheung01/avatar_last_airbender/refs/heads/main/data/Sokka.csv", rowConverter)
   .then(function(data) {
     data_sokka= data;
 
@@ -63,7 +63,7 @@ d3.csv("https://raw.githubusercontent.com/JasonCheung01/avatar_last_airbender/re
   });
   
 // data Toph
-d3.csv("https://raw.githubusercontent.com/JasonCheung01/avatar_last_airbender/refs/heads/additional_graphs/data/Toph.csv", rowConverter)
+d3.csv("https://raw.githubusercontent.com/JasonCheung01/avatar_last_airbender/refs/heads/main/data/Toph.csv", rowConverter)
   .then(function(data) {
     data_toph= data;
 
@@ -73,7 +73,7 @@ d3.csv("https://raw.githubusercontent.com/JasonCheung01/avatar_last_airbender/re
   });
   
 // data Zuko
-d3.csv("https://raw.githubusercontent.com/JasonCheung01/avatar_last_airbender/refs/heads/additional_graphs/data/Zuko.csv", rowConverter)
+d3.csv("https://raw.githubusercontent.com/JasonCheung01/avatar_last_airbender/refs/heads/main/data/Zuko.csv", rowConverter)
   .then(function(data) {
     data_zuko= data;
 
