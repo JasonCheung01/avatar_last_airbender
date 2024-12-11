@@ -21,20 +21,62 @@ indicating their trust and comfortability of each other
   <img src="images/team_avatar_hug.jpg" alt="team_avatar" style="width: 80%;"/> 
 </div> 
 
-## Limitations 
-As for the limitations we faced while exploring the data set, the main one was 
-primarily trying to transform one of the graphs to be more readable, 
-specifically the graph in Section 3.1.2 on the Results Page. 
+## Limitations/Difficulties  
+For the limitations we faced while exploring the data set, it was primarily 
+graph transformations for better readability and D3 path issues.
 
-Given the many colors involved, we initially wanted to remove the legend and 
-add the character’s name as text to the line using a library called gg_repel. 
-However, this caused a lot of texts to overlap with one another, given how 
-close each of the lines was, and led texts to appear in the middle of the graph. 
-Furthermore, we wanted to use a better set of qualitative colors; however, only 
-two color palettes from the RColorBrewer package can support more than ten 
-colors: “Paired” and “Set3. Unfortunately, these two color palettes were 
-unsuitable as they made the lines unreadable, leading us to utilize the default 
-color from ggplot2.   
+### Graph Transformation Issues  
+
+#### “Top 10 Characters with the Most Lines per Book Chapter” Graph
+
+For the “Top 10 Characters with the Most Lines per Book Chapter” graph in 
+Section 3.1.3, to help improve reading the colored lines, we wanted to remove 
+the legend and add the character’s name as text to the lines instead by using a 
+library called gg_repel. However, this caused issues as many of the texts 
+overlapped one another, given how close each line was, and made some texts 
+appear in the middle of the graph. 
+
+Additionally, to help improve color readability, we tried to find a better 
+qualitative color set from the RColorBrewer package, where we found only two 
+color pallets that can support more than 10 colors: “Paired” and “Set3”. 
+Unfortunately, this did not help, as the colors used from the two pallets were 
+still challenging to read and did not correlate well with our categorical 
+“characters” variable. As a result, we decided to use the default colors from 
+ggplot2. 
+
+Below is our attempt to do so:  
+
+![Top 10 Characters with the Most Lines per Book Chapter (Fail Version)](images/graphs/top10_character_dialogue_per_book_failed.png)
+
+#### “Average Ratings for Characters with Over 15 Appearances Per Episodes” Graph 
+
+For the “Average Ratings for Characters with Over 15 Appearances Per Episodes” 
+graph Section 3.2.3, to help improve the interpretability of the circle size, 
+we thought using different shapes or setting labels may help. Although we were 
+successful in doing so, we were conflicted about these changes. 
+
+For the different shapes, we were debating whether this would help or make the 
+reader more confused with the various shapes involved. For the labels, 
+although it was clear what each circle represented, it added too much 
+unnecessary text to the graph, making it messy. As a result, this led us to 
+choose the original graph design.  
+
+Below is the additional graph design created:
+
+![Average IMDb Rating for characters (Shape Version )](images/graphs/average_ratings_character_shape.png)
+
+![Average IMDb Rating for characters (Label Version )](images/graphs/average_ratings_character_label.png)  
+
+### D3 Issues 
+#### File Relative Path
+To properly load the multiple CSV data files we created for the interactive 
+graph, which will work on all branches, we wanted to use a file relative path 
+instead of a full hardcoded URL path that was branch-dependent. However, this 
+method did not work given how the QMD notebook is rendered and will require 
+modification to the YAML file to make it work properly. Thus, a workaround 
+instead was to read the current branch name and embed it in the URL so that it 
+could properly make the API call to the data file directory.  
+
 
 ## Future Direction  
 Given our limited time constraints, one future direction we would have liked to 

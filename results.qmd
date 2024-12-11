@@ -31,7 +31,6 @@ the help of both graphs, we can see a few exceptional cases where some of the
 top 10 characters appearing in fewer episodes have more dialogues than those 
 who appear often.  
 
-
 ### Top Characters with the Most Solo Scenes
 
 This naturally led us to wonder not only about the frequency of dialogue but also about the moments when these characters were given the spotlight on their own. To explore this further, we analyzed the top characters with the most solo scenes, as these moments often reveal critical aspects of their personalities and contributions to the story. Here’s what we found:
@@ -39,7 +38,6 @@ This naturally led us to wonder not only about the frequency of dialogue but als
 ![Top 10 Characters with the Most Solo Scenes](images/graphs/top10_character_solo_scene.png)
 
 As expected, the main characters dominate the top 10. However, this graph also features new characters not previously highlighted, such as **Piandao** and **Roku**, who played significant roles in the episodes *“Sokka’s Master”* and *“The Avatar and the Fire Lord”*, respectively.
->>>>>>> main
 
 ### What about each season? Do his friends, Katara, Sokka, Toph, and Zuko, begin to talk more than him?
 
@@ -105,7 +103,7 @@ Excluding the main characters, the episodes with the lowest fan ratings were tho
 
 ### Top Interactions Throughout the Entire Show
 
-![Top 10 Interactions Throughout Etire Show](images/graphs/top10_interactions.png)
+![Top 10 Interactions Throughout Entire Show](images/graphs/top10_interactions.png)
 
 We define an interaction between a set of characters as occurring whenever they share a specific scene in the show. This metric allows us to quantify and highlight the most significant character dynamics throughout the series. As the graph illustrates, it’s no surprise that the original **Team Avatar**—**Aang**, **Katara**, and **Sokka**—leads with the highest number of interactions.
 
