@@ -1,13 +1,13 @@
 # Introduction 
 <div style="text-align: center;">
-  <img src="images/my_cabbages.gif" alt="cabbage_man" loop="true" /> 
+  <img src="images/my_cabbages.gif" alt="cabbage_man" loop="true" style="width: 80%;"/> 
 </div>
 
-If you could recognize this infamous cabbage man and his love for his cabbage, 
+If you could recognize this infamous cabbage man and his love for his cabbages, 
 then it would be no surprise to you that the topic we chose to discuss was 
 Avatar the Last Airbender. 
 
-To keep it brief to those who don't know, Avatar the Last Airbender is a 
+To keep it brief for those who don't know, Avatar the Last Airbender is a 
 television series that focuses on a 12-year-old boy named Aang, who is the last 
 surviving Air Nomad and Avatar who is destined to maintain the balance of the 
 world and master all four elements: water, earth, fire, and air. However, due 
@@ -37,7 +37,7 @@ Show adaptation, we thought this would be a good topic to explore as the show
 has caught many people's attention again. Thus, some questions that we are 
 interested in studying are the following:   
 
-1. How often does Aang speak in the show? What about each season? Does his 
+1. How often does Aang speak in the show? What about each season? Do his 
 friends, Katara, Sokka, Toph, and Zuko, begin to talk more than him? 
 
 2. How often does each pair of main characters interact with each other? For 
@@ -48,11 +48,14 @@ Sokka, Toph, Zuko, etc?
 3. Does a particular main character's appearance in the episode impact the IMDB 
 Rating positively or negatively?
 
-As for the reasons why we chose these type of questions, it is because not only 
-were we interested in whether it would change our perspective or provide new 
-insight into our favorite characters in the show, but we also hoped that it 
-would do the same for the large fanbase for the show or for new incoming 
-watchers starting the show. 
+As for the reasons why we chose these types of questions, we did so for mainly 
+two reasons: 
+
+1. We were interested in whether this would change our perspective or provide 
+new insight into our favorite characters from the show and
+
+2. We hoped these questions would do the same for the show's large fanbase and 
+new incoming watchers starting the show. 
 
 
 

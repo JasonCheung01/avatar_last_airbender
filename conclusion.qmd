@@ -1,1 +1,45 @@
-# Conclusion
+# Conclusion 
+
+## Main Takeaways
+A few main takeaways that we got from exploring the *appa* R package data set 
+created by Avery Robbins were primarily: 
+
+1. The importance of each character in Team Avatar and their key role throughout 
+the show, as they were consistently among the top 5 on all our analyses about 
+characters. Not just that, but the importance of each side character throughout 
+the show as they each played a contributing factor to the character's 
+development in Team Avatar 
+
+2. The gradual increase of love and popularity of the show, given the increased 
+IMDb rating per season, especially for the Fire Book Chapter 
+
+3. The growth and development of each character throughout the show, especially 
+Team Avatar, provided each member's increasing interactivity with one another, 
+indicating their trust and comfortability of each other 
+
+<div style="text-align: center;">
+  <img src="images/team_avatar_hug.jpg" alt="team_avatar" style="width: 80%;"/> 
+</div> 
+
+## Limitations 
+As for the limitations we faced while exploring the data set, the main one was 
+primarily trying to transform one of the graphs to be more readable, 
+specifically the graph in Section 3.1.2 on the Results Page. 
+
+Given the many colors involved, we initially wanted to remove the legend and 
+add the character’s name as text to the line using a library called gg_repel. 
+However, this caused a lot of texts to overlap with one another, given how 
+close each of the lines was, and led texts to appear in the middle of the graph. 
+Furthermore, we wanted to use a better set of qualitative colors; however, only 
+two color palettes from the RColorBrewer package can support more than ten 
+colors: “Paired” and “Set3. Unfortunately, these two color palettes were 
+unsuitable as they made the lines unreadable, leading us to utilize the default 
+color from ggplot2.   
+
+## Future Direction 
+
+<div style="text-align: center;">
+  <img src="images/team_avatar_hd.jpg" alt="team_avatar_hd" style="width: 90%;"/>
+</div>
+
+## Lessons Learned

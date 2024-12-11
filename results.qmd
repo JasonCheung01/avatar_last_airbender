@@ -1,11 +1,11 @@
 # Results
 
-## How often does Aang speak in the show? What about each season? Does his friends, Katara, Sokka, Toph, and Zuko, begin to talk more than him?
+## How often does Aang speak in the show? What about each season? Do his friends, Katara, Sokka, Toph, and Zuko, begin to talk more than him?
 ### How often does Aang speak in the show?
 
 To begin our analysis on the **`appa` R package** data set created by Avery 
 Robbins, we decided first to explore the question of "How often does Aang speak 
-in the show? What about each season? Does his friends, Katara, Sokka, Toph, and 
+in the show? What about each season? Do his friends, Katara, Sokka, Toph, and 
 Zuko, begin to talk more than him?" To do this, we decided to get the total 
 amount of dialogue spoken by every character throughout the show and focused 
 only on the top 10, as there were over 300 characters, including the supporting 
@@ -43,15 +43,15 @@ episodes, Toph still had about 200 more dialogue than him. This was quite a
 surprise as we expected Iroh to have more given the many life lessons and quotes 
 he gives to the members of team Avatar, especially Zuko.
 
-All in all, by using the following two graphs together, we can see that the 
-majority of the top 10 characters with the most dialogues/lines throughout the 
-show are the one who often appear in episodes. This can be seen for Aang, Sokka,
-Katara, and Zuko, as they remain in the top 4 in both graphs in the same order. 
-Furthermore, with the help of both graphs, we can see a few exceptional cases 
-where some of the top 10 characters appearing in fewer episodes have more 
-dialogues than those who appear often.  
+By using the following two graphs together, we can see that the majority of the 
+top 10 characters with the most dialogues/lines throughout the show are the one 
+who often appear in episodes. This can be seen for Aang, Sokka, Katara, and Zuko, 
+as they remain in the top 4 in both graphs in the same order. Furthermore, with 
+the help of both graphs, we can see a few exceptional cases where some of the 
+top 10 characters appearing in fewer episodes have more dialogues than those 
+who appear often.  
 
-### What about each season? Does his friends, Katara, Sokka, Toph, and Zuko, begin to talk more than him?
+### What about each season? Do his friends, Katara, Sokka, Toph, and Zuko, begin to talk more than him?
 
 ![Top 10 Character Dialogue/Lines Per Book](images/graphs/top10_character_dialogue_per_book.png)
 
