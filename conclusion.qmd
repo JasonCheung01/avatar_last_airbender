@@ -36,7 +36,22 @@ colors: “Paired” and “Set3. Unfortunately, these two color palettes were
 unsuitable as they made the lines unreadable, leading us to utilize the default 
 color from ggplot2.   
 
-## Future Direction 
+## Future Direction  
+Given our limited time constraints, one future direction we would have liked to 
+consider is finding another dataset that works well with this dataset containing 
+information to strengthen our exploration. For example, a dataset that includes 
+the following category: 
+
+* Having each character’s gender 
+* Location of where characters were during the episodes
+* Ratings from another rating platform besides IMDb
+* The total number of people who participated in those ratings, or
+* Fan favorite characters 
+
+Another future direction is possibly comparing our exploration to Legend of 
+Korra, as it is the sequel to Avatar the Last Airbender. Therefore, we can see 
+if the two shows are entirely different or similar despite being animated in 
+the same universe.  
 
 <div style="text-align: center;">
   <img src="images/team_avatar_hd.jpg" alt="team_avatar_hd" style="width: 90%;"/>

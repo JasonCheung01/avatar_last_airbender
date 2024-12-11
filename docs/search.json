@@ -134,7 +134,7 @@
     "href": "conclusion.html#future-direction",
     "title": "5  Conclusion",
     "section": "5.3 Future Direction",
-    "text": "5.3 Future Direction",
+    "text": "5.3 Future Direction\nGiven our limited time constraints, one future direction we would have liked to consider is finding another dataset that works well with this dataset containing information to strengthen our exploration. For example, a dataset that includes the following category:\n\nHaving each character’s gender\nLocation of where characters were during the episodes\nRatings from another rating platform besides IMDb\nThe total number of people who participated in those ratings, or\nFan favorite characters\n\nAnother future direction is possibly comparing our exploration to Legend of Korra, as it is the sequel to Avatar the Last Airbender. Therefore, we can see if the two shows are entirely different or similar despite being animated in the same universe.",
     "crumbs": [
       "<span class='chapter-number'>5</span>  <span class='chapter-title'>Conclusion</span>"
     ]
