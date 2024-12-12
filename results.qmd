@@ -1,10 +1,15 @@
 # Results
 
-## How often does Aang speak in the show? What about each season? Does his friends, Katara, Sokka, Toph, and Zuko, begin to talk more than him?
-
+## How often does Aang speak in the show? What about each season? Do his friends, Katara, Sokka, Toph, and Zuko, begin to talk more than him?
 ### How often does Aang speak in the show?
 
-To begin our analysis on the **`appa` R package** data set created by Avery Robbins, we decided first to explore the question of "How often does Aang speak in the show? What about each season? Does his friends, Katara, Sokka, Toph, and Zuko, begin to talk more than him?" To do this, we decided to get the total amount of dialogue spoken by every character throughout the show and focused only on the top 10, as there were over 300 characters, including the supporting and background characters.
+To begin our analysis on the **`appa` R package** data set created by Avery 
+Robbins, we decided first to explore the question of "How often does Aang speak 
+in the show? What about each season? Do his friends, Katara, Sokka, Toph, and 
+Zuko, begin to talk more than him?" To do this, we decided to get the total 
+amount of dialogue spoken by every character throughout the show and focused 
+only on the top 10, as there were over 300 characters, including the supporting 
+and background characters. 
 
 ![The Top 10 Avatar the Last Airbender Characters with the Most Dialogues/Lines](images/graphs/top10_character_dialogue.png)
 
@@ -18,7 +23,13 @@ However, one thing about this graph that caught our attention was that side char
 
 As you can see, our suspicions about Zhao and Jet appearing infrequently in the show were correct. Despite Jet only appearing in 5 and Zhao appearing in 7 episodes, they still made it among the top 10. What’s even more interesting is that we can see characters like Suki, who appeared in more episodes than Jet, had fewer dialogues than him by a small amount. Similarly, we can see the same case for Toph and Uncle Iroh. Despite Iroh appearing slightly slightly more in episodes, Toph still had about 200 more dialogue than him. This was quite a surprise as we expected Iroh to have more given the many life lessons and quotes he gives to the members of team Avatar, especially Zuko.
 
-All in all, by using the following two graphs together, we can see that the majority of the top 10 characters with the most dialogues/lines throughout the show are the one who often appear in episodes. This can be seen for Aang, Sokka, Katara, and Zuko, as they remain in the top 4 in both graphs in the same order. Furthermore, with the help of both graphs, we can see a few exceptional cases where some of the top 10 characters appearing in fewer episodes have more dialogues than those who appear often.
+By using the following two graphs together, we can see that the majority of the 
+top 10 characters with the most dialogues/lines throughout the show are the one 
+who often appear in episodes. This can be seen for Aang, Sokka, Katara, and Zuko, 
+as they remain in the top 4 in both graphs in the same order. Furthermore, with 
+the help of both graphs, we can see a few exceptional cases where some of the 
+top 10 characters appearing in fewer episodes have more dialogues than those 
+who appear often.  
 
 ### Top Characters with the Most Solo Scenes
 
@@ -28,7 +39,7 @@ This naturally led us to wonder not only about the frequency of dialogue but als
 
 As expected, the main characters dominate the top 10. However, this graph also features new characters not previously highlighted, such as **Piandao** and **Roku**, who played significant roles in the episodes *“Sokka’s Master”* and *“The Avatar and the Fire Lord”*, respectively.
 
-### What about each season? Does his friends, Katara, Sokka, Toph, and Zuko, begin to talk more than him?
+### What about each season? Do his friends, Katara, Sokka, Toph, and Zuko, begin to talk more than him?
 
 ![Top 10 Character Dialogue/Lines Per Book](images/graphs/top10_character_dialogue_per_book.png)
 
@@ -92,7 +103,7 @@ Excluding the main characters, the episodes with the lowest fan ratings were tho
 
 ### Top Interactions Throughout the Entire Show
 
-![Top 10 Interactions Throughout Etire Show](images/graphs/top10_interactions.png)
+![Top 10 Interactions Throughout Entire Show](images/graphs/top10_interactions.png)
 
 We define an interaction between a set of characters as occurring whenever they share a specific scene in the show. This metric allows us to quantify and highlight the most significant character dynamics throughout the series. As the graph illustrates, it’s no surprise that the original **Team Avatar**—**Aang**, **Katara**, and **Sokka**—leads with the highest number of interactions.
 
